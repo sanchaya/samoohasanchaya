@@ -5,3 +5,7 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+Language.create([
+  { name: 'Kannada', language_code: 'kn' },
+  { name: 'English', language_code: 'en' }
+  ])
