@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  date_accessioned: MyString
+  date_available: MyString
+  date_issued: MyString
+  link: MyString
+  rights: MyString
+  subjects: MyString
+  file_name: MyString
+  file_size: MyString
+  category: MyString
+
+two:
+  date_accessioned: MyString
+  date_available: MyString
+  date_issued: MyString
+  link: MyString
+  rights: MyString
+  subjects: MyString
+  file_name: MyString
+  file_size: MyString
+  category: MyString
