@@ -6,7 +6,7 @@ class CreateBookTranslations < ActiveRecord::Migration
       t.string :author
       t.string :book_title
       t.string :publisher
-
+      t.integer :user_id
       t.timestamps
     end
   end
