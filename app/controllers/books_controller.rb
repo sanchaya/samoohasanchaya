@@ -19,6 +19,7 @@ class BooksController < ApplicationController
 
   # GET /books/1/edit
   def edit
+    @translate = @book.book_translations.new
   end
 
   # POST /books
@@ -40,8 +41,9 @@ class BooksController < ApplicationController
   # PATCH/PUT /books/1
   # PATCH/PUT /books/1.json
   def update
+    @translation = @book.book_translations.new(book_translation_params)
     respond_to do |format|
-      if @book.update(book_params)
+      if @translation.save
         format.html { redirect_to @book, notice: 'Book was successfully updated.' }
         format.json { render :show, status: :ok, location: @book }
       else
@@ -61,6 +63,7 @@ class BooksController < ApplicationController
     end
   end
 
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_book
@@ -68,7 +71,7 @@ class BooksController < ApplicationController
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
-    def book_params
-      params.require(:book).permit(:author, :book_title, :publisher, :language_id)
+    def book_translation_params
+      params.require(:translation).permit(:author, :book_title, :publisher)
     end
-end
+  end

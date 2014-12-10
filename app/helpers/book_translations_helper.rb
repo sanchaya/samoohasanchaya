@@ -1,0 +1,2 @@
+module BookTranslationsHelper
+end
