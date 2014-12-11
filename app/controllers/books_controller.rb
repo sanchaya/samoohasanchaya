@@ -4,7 +4,8 @@ class BooksController < ApplicationController
   # GET /books
   # GET /books.json
   def index
-    @books = Book.paginate(:page => params[:page], :per_page => 30)
+    untranslated_books = Book.where("id not in (?)", BookTranslation.pluck('book_id'))
+    @books = untranslated_books.paginate(:page => params[:page], :per_page => 30)
   end
 
   # GET /books/1
@@ -19,7 +20,7 @@ class BooksController < ApplicationController
 
   # GET /books/1/edit
   def edit
-    @translate = @book.book_translations.new
+    @translate = @book.book_translations.blank? ? @book.book_translations.new : @book.book_translations.first
   end
 
   # POST /books

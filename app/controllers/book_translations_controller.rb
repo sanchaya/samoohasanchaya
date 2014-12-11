@@ -1,12 +1,22 @@
 class BookTranslationsController < ApplicationController
 
+  def index
+    translated_books = Book.where("id in (?)", BookTranslation.pluck('book_id'))
+    @books = translated_books.paginate(:page => params[:page], :per_page => 30)
+  end
+
+  def new
+    @book = Book.find(params['book_id'])
+    @translation = @book.book_translations.new
+  end
+
   def create
     @book = Book.find(params['book_id'])
     @translation = @book.book_translations.new(book_translation_params)
-    @translation.id = Translation.last.id
+    @translation.language_id = Language.first.id
     respond_to do |format|
       if @translation.save
-        format.html { redirect_to @book, notice: 'Book was successfully updated.' }
+        format.html { redirect_to books_path, notice: 'Book was successfully updated.' }
         format.json { render :show, status: :ok, location: @book }
       else
         format.html { render :edit }

@@ -3,8 +3,10 @@ Rails.application.routes.draw do
 
   devise_for :users
   resources :books do 
-    resources :book_translations
+    resources :book_translations, only: [:new, :create]
   end
+
+  resources :book_translations, only: [:index]
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
