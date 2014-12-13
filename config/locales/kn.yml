@@ -2,6 +2,10 @@ kn:
   translate: 'Translate'
   translated: 'translated'
   samooha: 'samooha'
+  show: 'show'
+  edit: 'edit'
+  destroy: 'destroy'
+  back: 'back'
 
   # Books
   author: 'author'

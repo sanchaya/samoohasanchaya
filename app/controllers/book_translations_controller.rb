@@ -15,7 +15,11 @@ class BookTranslationsController < ApplicationController
    @translate = @book.book_translations.find(params[:id])
  end
 
- def create
+ def show
+  @book = BookTranslation.find(params[:id])
+end
+
+def create
   @book = Book.find(params['book_id'])
   @translate = @book.book_translations.new(book_translation_params)
   @translate.language_id = Language.first.id
@@ -39,6 +43,15 @@ def update
     else
       format.html { render :edit }
     end
+  end
+end
+
+def destroy
+  @book = BookTranslation.find(params[:id])
+  @book.destroy
+  respond_to do |format|
+    format.html { redirect_to books_url, notice: 'Book was successfully destroyed.' }
+    format.json { head :no_content }
   end
 end
 
