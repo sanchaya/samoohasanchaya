@@ -4,7 +4,8 @@ class BooksController < ApplicationController
   # GET /books
   # GET /books.json
   def index
-    untranslated_books = Book.where("id not in (?)", BookTranslation.pluck('book_id'))
+    translated = BookTranslation.pluck('book_id')
+    untranslated_books = Book.where("id not in (?)", translated.blank? ? [0] : translated )
     @books = untranslated_books.paginate(:page => params[:page], :per_page => 30)
   end
 
