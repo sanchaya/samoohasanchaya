@@ -2,3 +2,8 @@ kn:
   translate: 'Translate'
   translated: 'translated'
   samooha: 'samooha'
+
+  # Books
+  author: 'author'
+  book_title: 'book_title'
+  publisher: 'publisher'
