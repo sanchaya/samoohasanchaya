@@ -21,7 +21,6 @@ class BooksController < ApplicationController
 
   # GET /books/1/edit
   def edit
-    @translate = @book.book_translations.blank? ? @book.book_translations.new : @book.book_translations.first
   end
 
   # POST /books
@@ -43,16 +42,6 @@ class BooksController < ApplicationController
   # PATCH/PUT /books/1
   # PATCH/PUT /books/1.json
   def update
-    @translation = @book.book_translations.new(book_translation_params)
-    respond_to do |format|
-      if @translation.save
-        format.html { redirect_to @book, notice: 'Book was successfully updated.' }
-        format.json { render :show, status: :ok, location: @book }
-      else
-        format.html { render :edit }
-        format.json { render json: @book.errors, status: :unprocessable_entity }
-      end
-    end
   end
 
   # DELETE /books/1
