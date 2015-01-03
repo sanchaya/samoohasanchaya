@@ -1,9 +1,16 @@
 Rails.application.routes.draw do
   get 'homes/index'
 
-  get 'book_translations/create'
-
   devise_for :users
+
+  resources :publishers do
+    resources :publisher_translations
+  end
+
+  resources :authors do
+    resources :author_translations
+  end
+
   resources :books do 
     resources :book_translations, only: [:new, :create, :edit, :update]
   end
