@@ -9,8 +9,11 @@ kn:
 
   # Home
   book: 'Book'
+  books: 'books'
   publisher: 'Publisher'
+  publishers: 'publishers'
   author: 'Author'
+  authors: 'authors'
   # Books
   author: 'author'
   book_title: 'book_title'
