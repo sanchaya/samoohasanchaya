@@ -1,21 +1,18 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th><%= t(:author) %></th>
-      <th><%= t(:book_title) %></th>
-      <th><%= t(:publisher) %></th>
+      <th><%= t(:english) %></th>
+      <th><%= t(:kannada) %></th>
       <th></th>
     </tr>
   </thead>
   <tbody>
-    <% @translated_books.each do |book| %>
+    <% @translated_books.each do |trans_book| %>
     <tr>
-      <td><%= book.author %></td>
-      <td><%= book.book_title %></td>
-      <td><%= book.publisher %></td>
+      <td><%= trans_book.book.book_title %></td>
+      <td><%= trans_book.book_title %></td>
       <td>
-        <%= link_to t(:show), book %>
-        <%= link_to t(:edit), edit_book_book_translation_path(book.book, book) %>
+        <%= link_to t(:edit), edit_book_book_translation_path(trans_book.book, trans_book) %>
       </td>
     </tr>
     <% end %>

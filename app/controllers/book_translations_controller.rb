@@ -1,7 +1,7 @@
 class BookTranslationsController < ApplicationController
 
   def index
-    translated_books = BookTranslation.all
+    translated_books = BookTranslation
     @translated_books = translated_books.paginate(:page => params[:page], :per_page => 30)
   end
 
@@ -22,7 +22,7 @@ end
 def create
   @book = Book.find(params['book_id'])
   @translate = @book.book_translations.new(book_translation_params)
-  @translate.language_id = Language.first.id
+  @translate.language_id = Language.kannada.id
   respond_to do |format|
     if @translate.save
       format.html { redirect_to books_path, notice: 'Book was successfully translated.' }
@@ -58,6 +58,6 @@ end
 private
     # Never trust parameters from the scary internet, only allow the white list through.
     def book_translation_params
-      params.require(:book_translation).permit(:author, :book_title, :publisher)
+      params.require(:book_translation).permit(:book_title)
     end
   end

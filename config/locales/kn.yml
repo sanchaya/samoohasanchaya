@@ -7,7 +7,13 @@ kn:
   destroy: 'destroy'
   back: 'back'
 
+  # Home
+  book: 'Book'
+  publisher: 'Publisher'
+  author: 'Author'
   # Books
   author: 'author'
   book_title: 'book_title'
   publisher: 'publisher'
+  kannada: 'kannada'
+  english: 'english'
