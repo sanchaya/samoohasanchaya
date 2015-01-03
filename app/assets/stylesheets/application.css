@@ -50,6 +50,11 @@
  }
  .translation-tree {
  	clear: both;
+ 	width: 50%; 
+ 	margin-top: 12%;
+ }
+ .translation-tree h1 {
+ 	text-align: center;
  }
 
  .footer {

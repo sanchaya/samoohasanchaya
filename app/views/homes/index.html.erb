@@ -25,10 +25,6 @@
 <div class="translation-tree"> 
   <h1> <%= t(:Translate) %>  </h1>
 
-  <ul> 
-    <li> <%= link_to t(:book), books_path %> </li>
-    <li> <%= link_to t(:publisher), publishers_path %> </li>
-    <li> <%= link_to t(:author), authors_path %> </li>
-  </ul>
+<%= render 'layouts/translate_nav_menu' %>
 
 </div>

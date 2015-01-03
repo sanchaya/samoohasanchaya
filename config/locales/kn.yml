@@ -2,10 +2,12 @@ kn:
   translate: 'Translate'
   translated: 'translated'
   samooha: 'samooha'
+  samooha_sanchaya: 'Samooha Sanchaya'
   show: 'show'
   edit: 'edit'
   destroy: 'destroy'
   back: 'back'
+  about_us: 'about_us'
 
   # Home
   book: 'Book'
