@@ -1,2 +1,21 @@
-<h1>Publishers#index</h1>
-<p>Find me in app/views/publishers/index.html.erb</p>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= t(:publisher) %></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @publishers.each do |publisher| %>
+    <tr>
+      <td><%= publisher.name %></td>
+      <td>
+        <%= link_to t(:translate),
+        new_publisher_publisher_translation_path(publisher), :class => 'btn btn-default btn-xs' %>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= will_paginate @publishers %>
