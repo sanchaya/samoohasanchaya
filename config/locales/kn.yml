@@ -8,6 +8,8 @@ kn:
   destroy: 'destroy'
   back: 'back'
   about_us: 'about_us'
+  sign_out: 'sign_out'
+  sign_in: 'sign_in'
 
   # Home
   book: 'Book'
