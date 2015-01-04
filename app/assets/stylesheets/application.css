@@ -19,8 +19,8 @@
  	width:100%;
  }
  .circle-box {
- 	width:200px; /* make it percent in order to make it responsive box 20%; */
- 	float:left;
+ 	width: 30%;
+ 	 float: right;
  }
  .circle-text {
  	width:50%;
@@ -50,7 +50,6 @@
  }
  .translation-tree {
  	clear: both;
- 	width: 50%; 
  	margin-top: 12%;
  }
  .translation-tree h1 {
