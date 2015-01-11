@@ -1,5 +1,4 @@
 class AuthorTranslationsController < ApplicationController
-  before_action :authenticate_user!
   def index
   end
 
@@ -15,10 +14,9 @@ class AuthorTranslationsController < ApplicationController
     @author = Author.find(params['author_id'])
     @translate = @author.author_translations.new(author_translation_params)
     @translate.language_id = Language.kannada.id
-    @translate.user_id = current_user.id
     respond_to do |format|
       if @translate.save
-        format.html { redirect_to authors_path, notice: 'Author was successfully translated.' }
+        format.html { redirect_to root_path, notice: 'Author was successfully translated.' }
         format.json { render :show, status: :ok, location: @author }
       else
         format.html { render :new }

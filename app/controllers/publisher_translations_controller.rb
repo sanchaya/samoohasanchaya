@@ -1,5 +1,4 @@
 class PublisherTranslationsController < ApplicationController
-  before_action :authenticate_user!
   def index
   end
 
@@ -15,10 +14,9 @@ class PublisherTranslationsController < ApplicationController
     @publisher = Publisher.find(params['publisher_id'])
     @translate = @publisher.publisher_translations.new(publisher_translation_params)
     @translate.language_id = Language.kannada.id
-    @translate.user_id = current_user.id
     respond_to do |format|
       if @translate.save
-        format.html { redirect_to publishers_path, notice: 'Publisher was successfully translated.' }
+        format.html { redirect_to root_path, notice: 'Publisher was successfully translated.' }
         format.json { render :show, status: :ok, location: @publisher }
       else
         format.html { render :new }

@@ -24,7 +24,7 @@ def create
   @translate.language_id = Language.kannada.id
   respond_to do |format|
     if @translate.save
-      format.html { redirect_to books_path, notice: 'Book was successfully translated.' }
+      format.html { redirect_to root_path, notice: 'Book was successfully translated.' }
       format.json { render :show, status: :ok, location: @book }
     else
       format.html { render :new }

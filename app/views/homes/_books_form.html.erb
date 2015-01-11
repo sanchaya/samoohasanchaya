@@ -1,4 +1,4 @@
-  <%= form_for [@book,@translate],  :html => { :class => "book" } do |f| %>
+  <%= form_for [@book,@translate_book],  :html => { :class => "book" } do |f| %>
   <div class="form-group">
     <%= label_tag :book_title, t(:english) %>
     <%= label_tag :book_title, @book.book_title , :class => 'form-control'%>
