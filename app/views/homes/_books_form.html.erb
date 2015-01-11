@@ -1,11 +1,10 @@
   <%= form_for [@book,@translate_book],  :html => { :class => "book" } do |f| %>
   <div class="form-group">
-    <%= label_tag :book_title, t(:english) %>
+    <%= label_tag :book_title, t(:book) %>
     <%= label_tag :book_title, @book.book_title , :class => 'form-control'%>
   </div>
   <div class="form-group">
-    <%= f.label :book_title, t(:kannada)%>
     <%= f.text_field :book_title, :class => 'form-control kan-ime' %>
   </div>
-  <%= f.submit 'Translate', class: "btn btn-default"%>
+  <%= f.submit t(:translate), class: "btn btn-default"%>
   <% end %>
