@@ -3,7 +3,10 @@ class HomesController < ApplicationController
     @translated_authors_count = AuthorTranslation.count
     @translated_publishers_count = PublisherTranslation.count
     @translated_books_count = BookTranslation.count
-
+    # Clean the below code
+    # Use DRY
+    # Move logics to Model
+    # Use single query to fetch untranslated
     translated_books = BookTranslation.pluck('book_id')
     @book = Book.where("id not in (?)", translated_books.blank? ? [0] : translated_books ).first
     @translate_book = @book.book_translations.new
