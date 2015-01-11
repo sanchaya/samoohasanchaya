@@ -1,4 +1,26 @@
-en:
-  hello: "Hello world"
-  translate: "Translate"
-  samooha: ''
+kn:
+  translate: 'Translate'
+  translated: 'translated'
+  samooha: 'samooha'
+  samooha_sanchaya: 'Samooha Sanchaya'
+  show: 'show'
+  edit: 'edit'
+  destroy: 'destroy'
+  back: 'back'
+  about_us: 'about_us'
+  sign_out: 'sign_out'
+  sign_in: 'sign_in'
+
+  # Home
+  book: 'Book'
+  books: 'books'
+  publisher: 'Publisher'
+  publishers: 'publishers'
+  author: 'Author'
+  authors: 'authors'
+  # Books
+  author: 'author'
+  book_title: 'book_title'
+  publisher: 'publisher'
+  kannada: 'kannada'
+  english: 'english'

@@ -20,7 +20,7 @@
  }
  .circle-box {
  	width: 30%;
- 	 float: right;
+ 	float: right;
  }
  .circle-text {
  	width:50%;
@@ -59,3 +59,10 @@
  .footer {
  	margin-top: 20px;
  }
+
+/* Blocking ime selector pop up as we have bug with current version and botstrap 3
+We need to fix this later and remove below css
+*/
+.imeselector,.imeselector-toggle {
+	display: none !important ;
+}
