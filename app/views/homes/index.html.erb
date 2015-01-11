@@ -1,30 +1,18 @@
-<div class="circle-div"> 
-  <div class="circle-box"> 
-    <div class="circle-text">
-      <div> 
-        <%= @translated_books_count %> <br > <%= t(:books) %> 
-      </div>
-    </div>
-  </div>
-  <div class="circle-box"> 
-    <div class="circle-text">
-      <div> 
-      <%= @translated_publishers_count %> <br > <%= t(:publishers) %> 
-      </div>
-    </div>
-  </div>
-  <div class="circle-box"> 
-    <div class="circle-text">
-      <div> 
-        <%= @translated_authors_count %> <br > <%= t(:authors) %> 
-      </div>
-    </div>
-  </div>
-</div>
+<%#= render 'circles' %>
 
 <div class="translation-tree"> 
   <h1> <%= t(:Translate) %>  </h1>
 
-<%= render 'layouts/translate_nav_menu' %>
-
+  <%#= render 'layouts/translate_nav_menu' %>
+  <div class="row">
+    <div class="col-md-4"> Books
+    <%= render 'books_form' %>
+    </div>
+    <div class="col-md-4"> Publishers
+<%= render 'books_form' %>
+    </div>
+    <div class="col-md-4"> Authors
+<%= render 'books_form' %>
+    </div>
+  </div>
 </div>

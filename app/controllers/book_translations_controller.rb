@@ -1,5 +1,4 @@
 class BookTranslationsController < ApplicationController
-  before_action :authenticate_user!
   def index
     translated_books = BookTranslation
     @translated_books = translated_books.paginate(:page => params[:page], :per_page => 30)
@@ -23,7 +22,6 @@ def create
   @book = Book.find(params['book_id'])
   @translate = @book.book_translations.new(book_translation_params)
   @translate.language_id = Language.kannada.id
-  @translate.user_id = current_user.id
   respond_to do |format|
     if @translate.save
       format.html { redirect_to books_path, notice: 'Book was successfully translated.' }
