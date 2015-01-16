@@ -1,6 +1,6 @@
   <%= form_for [@book,@translate_book],  :html => { :class => "book" } do |f| %>
   <div class="form-group">
-    <%= label_tag :book_title, t(:book) %>
+    <%= label_tag :book_title, t(:book) %> <%= link_to(@book.book_description.link, target: '_blank') do %> <%= fa_icon "book" %> <% end %>
     <%= label_tag :book_title, @book.book_title , :class => 'form-control'%>
   </div>
   <div class="form-group">
