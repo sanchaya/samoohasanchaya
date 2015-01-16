@@ -1,23 +1,118 @@
 <div class="circle-div"> 
   <div class="circle-box"> 
-    <div class="circle-text">
-      <div> 
-        <%= @translated_books_count %> <br > <%= t(:books) %> 
-      </div>
-    </div>
+    <div id="book_circle" style="height: 300px;"></div>
   </div>
   <div class="circle-box"> 
-    <div class="circle-text">
-      <div> 
-      <%= @translated_publishers_count %> <br > <%= t(:publishers) %> 
-      </div>
-    </div>
+    <div id="publisher_circle" style="height: 300px;"></div>
   </div>
   <div class="circle-box"> 
-    <div class="circle-text">
-      <div> 
-        <%= @translated_authors_count %> <br > <%= t(:authors) %> 
-      </div>
-    </div>
+    <div id="author_circle" style="height: 300px;"></div>
   </div>
 </div>
+
+<script> 
+  $(function () {
+    $('#book_circle').highcharts({
+      chart: {
+        type: 'pie',
+        options3d: {
+          enabled: true,
+          alpha: 45
+        }
+      },
+      title: {
+        text: 'ಪುಸ್ತಕ',
+        floating: true,
+        margin: 2
+      },
+      credits: {
+        enabled: false
+      },
+      plotOptions: {
+        pie: {
+          innerSize: 100,
+          depth: 100
+        }
+      },
+      series: [{
+        name: ' ',
+        enabled: false,
+        data: [
+        ['ಅನುವಾದಿಸಿರುವುದು', <%= @translated_books_count %> ],
+        ['ಅನುವಾದಿಸಿ', <%= @books.count %>]
+        ]
+      }]
+    });
+
+
+
+// Publisher
+    $('#publisher_circle').highcharts({
+      chart: {
+        type: 'pie',
+        options3d: {
+          enabled: true,
+          alpha: 45
+        }
+      },
+      title: {
+        text: 'ಪ್ರಕಾಶಕ',
+        floating: true,
+        margin: 2
+      },
+      credits: {
+        enabled: false
+      },
+      plotOptions: {
+        pie: {
+          innerSize: 100,
+          depth: 100
+        }
+      },
+      series: [{
+        name: ' ',
+        data: [
+        ['ಅನುವಾದಿಸಿದವು', <%= @translated_publishers_count %> ],
+        ['ಅನುವಾದಿಸಿ', <%= @publishers.count %>]
+        ]
+      }]
+    });
+
+
+// Author
+    $('#author_circle').highcharts({
+      chart: {
+        type: 'pie',
+        options3d: {
+          enabled: true,
+          alpha: 45
+        }
+      },
+      title: {
+        text: 'ಲೇಖಕ',
+        floating: true,
+        margin: 2
+      },
+      credits: {
+        enabled: false
+      },
+      plotOptions: {
+        pie: {
+          innerSize: 100,
+          depth: 100
+        }
+      },
+      series: [{
+        name: ' ',
+        data: [
+        ['ಅನುವಾದಿಸಿದವು', <%= @translated_authors_count %> ],
+        ['ಅನುವಾದಿಸಿ', <%= @authors.count %>]
+        ]
+      }]
+    });
+
+
+
+
+  });
+</script>

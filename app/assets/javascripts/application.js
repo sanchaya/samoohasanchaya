@@ -15,6 +15,7 @@
 //= require twitter/bootstrap
 //= require turbolinks
 //= require jquery.validate
+//= require highcharts
 //= require jquery.ime
 //= require jquery.ime.selector
 //= require jquery.ime.preferences
