@@ -4,4 +4,7 @@ module ApplicationHelper
     params[:controller] == menu_name ? 'active' : ''
   end
 
+  def clean_link link
+    link.gsub('_', '.')
+  end
 end
