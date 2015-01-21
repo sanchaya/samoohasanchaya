@@ -21,5 +21,10 @@ class HomesController < ApplicationController
     @authors = Author.where("id not in (?)", translated_authors.blank? ? [0] : translated_authors )
     @author = @authors.first
     @translate_author = @author.author_translations.new
-  end
+end
+
+
+def about_us
+end
+
 end
