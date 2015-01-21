@@ -66,3 +66,14 @@ We need to fix this later and remove below css
 .imeselector,.imeselector-toggle {
 	display: none !important ;
 }
+
+/*Introduction to samooha on landing page text*/
+.intoduction-text {
+	margin: auto;
+	text-align: center;
+	width: 90%;
+}
+
+.into-header {
+	font-weight: bold;
+}
