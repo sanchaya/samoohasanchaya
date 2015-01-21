@@ -70,7 +70,7 @@ We need to fix this later and remove below css
 /*Introduction to samooha on landing page text*/
 .intoduction-text {
 	margin: auto;
-	text-align: justify;
+	text-align: center;
 	width: 90%;
 }
 
