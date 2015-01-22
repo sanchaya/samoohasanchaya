@@ -13,7 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require twitter/bootstrap
-//= require turbolinks
+// require turbolinks
 //= require jquery.validate
 //= require highcharts
 //= require jquery.ime
