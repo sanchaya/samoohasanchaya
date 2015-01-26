@@ -1,13 +1,17 @@
-  <%= form_for [@publisher,@translate_publisher],  :html => { :class => "book" } do |f| %>
-  <div class="form-group">
-    <%= label_tag :name, t(:publisher) %> 
-    <%= label_tag :name, @publisher.name , :class => 'form-control'%>
-  </div>
-  <div class="form-group">
-    <%= f.text_field :name, :class => 'form-control kan-ime' %>
-  </div>
-  <div class="form-group">
-    <%= link_to(clean_link(@publisher.books.first.book_description.link), target: '_blank') do %> <%= fa_icon "book 2x" %> <% end %>
-    <%= f.submit t(:translate), class: "btn btn-default"%>
-  </div>
-  <% end %>
+ <% if @publisher %>
+ <%= form_for [@publisher,@translate_publisher],  :html => { :class => "book" } do |f| %>
+ <div class="form-group">
+  <%= label_tag :name, t(:publisher) %> 
+  <%= label_tag :name, @publisher.name , :class => 'form-control'%>
+</div>
+<div class="form-group">
+  <%= f.text_field :name, :class => 'form-control kan-ime' %>
+</div>
+<div class="form-group">
+  <%= link_to(clean_link(@publisher.books.first.book_description.link), target: '_blank') do %> <%= fa_icon "book 2x" %> <% end %>
+  <%= f.submit t(:translate), class: "btn btn-default"%>
+</div>
+<% end %>
+<% else %>
+<%= t(:publisher) %> ಲಿಪ್ಯಂತರಣ  ಪೂರ್ಣಗೊಂಡಿದೆ
+<% end %>
