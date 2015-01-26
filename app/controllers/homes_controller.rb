@@ -20,7 +20,7 @@ class HomesController < ApplicationController
     translated_authors = AuthorTranslation.pluck('author_id')
     @authors = Author.where("id not in (?)", translated_authors.blank? ? [0] : translated_authors ).order('RAND()')
     @author = @authors.first
-    @translate_author = @author.author_translations.new
+    @translate_author = @author.author_translations.new if @author
 end
 
 
