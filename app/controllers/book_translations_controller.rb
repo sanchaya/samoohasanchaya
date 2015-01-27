@@ -1,4 +1,5 @@
 class BookTranslationsController < ApplicationController
+  before_action :authenticate_user!
   def index
     translated_books = BookTranslation
     @translated_books = translated_books.paginate(:page => params[:page], :per_page => 30)
@@ -38,7 +39,7 @@ def update
   @translate = @book.book_translations.find(params[:id])
   respond_to do |format|
     if @translate.update_attributes(book_translation_params)
-      format.html { redirect_to books_path, notice: 'Book was successfully translated.' }
+      format.html { redirect_to root_path, notice: 'Book was successfully translated.' }
     else
       format.html { render :edit }
     end

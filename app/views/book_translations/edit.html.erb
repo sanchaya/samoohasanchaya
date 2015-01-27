@@ -1,49 +1,25 @@
 <div class="row"> 
   <div class="col-lg-4">
-   <div class="control-group">
-    <%= label_tag :author, "Author",:class => 'control-label' %>
-    <div class="controls">
-      <%= label_tag :author, @book.author, :class => 'form-control' %>
+    <div class="control-group">
+      <%#= label_tag :book_title, t(:book),:class => 'control-label' %>
+      <div class="controls">
+        <%= label_tag :book_title, @book.book_title, :class => 'form-control' %>
+      </div>
     </div>
   </div>
-  <div class="control-group">
-    <%= label_tag :book_title, "Book Title",:class => 'control-label' %>
-    <div class="controls">
-      <%= label_tag :book_title, @book.book_title, :class => 'form-control' %>
+  <%= form_for [@book,@translate],  :html => { :class => "form-horizontal book" } do |f| %>
+  <div class="col-lg-4">
+    <div class="control-group">
+      <%# f.label :book_title, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :book_title, :class => 'form-control' %>
+      </div>
     </div>
   </div>
-  <div class="control-group">
-    <%= label_tag :publisher, "Publisher",:class => 'control-label' %>
-    <div class="controls">
-      <%= label_tag :publisher, @book.publisher, :class => 'form-control' %>
-    </div>
+  <div class="col-lg-4">
+  <%= f.submit 'Update', :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+    books_path, :class => 'btn btn-default' %>
   </div>
-</div>
-<%= form_for [@book,@translate],  :html => { :class => "form-horizontal book" } do |f| %>
-<div class="col-lg-4">
-  <div class="control-group">
-    <%= f.label :author, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :author, :class => 'form-control' %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :book_title, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :book_title, :class => 'form-control' %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :publisher, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :publisher, :class => 'form-control' %>
-    </div>
-  </div>
-</div>
-<div class="col-lg-4">
-<%= f.submit 'Translate', :class => 'btn btn-primary' %>
-  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-  books_path, :class => 'btn btn-default' %>
-</div>
-<% end %>
+  <% end %>
 </div>

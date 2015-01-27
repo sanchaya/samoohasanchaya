@@ -4,20 +4,22 @@ Rails.application.routes.draw do
   get '/help' => 'homes#help'
 
   devise_for :users
+# Clean below code. Use rails 4 new feature to avoide duplications
+resources :publishers do
+  resources :publisher_translations, only: [:new, :create, :edit, :update]
+end
 
-  resources :publishers do
-    resources :publisher_translations
-  end
+resources :authors do
+  resources :author_translations, only: [:new, :create, :edit, :update]
+end
 
-  resources :authors do
-    resources :author_translations
-  end
+resources :books do 
+  resources :book_translations, only: [:new, :create, :edit, :update]
+end
 
-  resources :books do 
-    resources :book_translations, only: [:new, :create, :edit, :update]
-  end
-
-  resources :book_translations, only: [:index, :show, :destroy]
+resources :book_translations, only: [:index, :show, :destroy]
+resources :author_translations, only: [:index, :show, :destroy]
+resources :publisher_translations, only: [:index, :show, :destroy]
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
