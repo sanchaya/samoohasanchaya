@@ -1,5 +1,8 @@
 class AuthorTranslationsController < ApplicationController
+  before_action :authenticate_user!, except: [:index, :new, :create]
   def index
+    translated_authors = AuthorTranslation
+    @translated_authors = translated_authors.paginate(:page => params[:page], :per_page => 30)
   end
 
   def new
@@ -8,6 +11,8 @@ class AuthorTranslationsController < ApplicationController
   end
 
   def edit
+    @author = Author.find(params['author_id'])
+    @translate = @author.author_translations.find(params[:id])
   end
 
   def create
@@ -25,7 +30,19 @@ class AuthorTranslationsController < ApplicationController
     end
   end 
 
-  private
+  def update
+   @author = Author.find(params['author_id'])
+   @translate = @author.author_translations.find(params[:id])
+   respond_to do |format|
+    if @translate.update_attributes(author_translation_params)
+      format.html { redirect_to root_path, notice: 'Author was successfully translated.' }
+    else
+      format.html { render :edit }
+    end
+  end
+end
+
+private
     # Never trust parameters from the scary internet, only allow the white list through.
     def author_translation_params
       params.require(:author_translation).permit(:name)

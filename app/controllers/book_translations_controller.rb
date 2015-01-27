@@ -1,5 +1,5 @@
 class BookTranslationsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:index, :new, :create]
   def index
     translated_books = BookTranslation
     @translated_books = translated_books.paginate(:page => params[:page], :per_page => 30)

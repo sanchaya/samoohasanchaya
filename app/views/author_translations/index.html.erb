@@ -1,2 +1,23 @@
-<h1>AuthorTranslations#index</h1>
-<p>Find me in app/views/author_translations/index.html.erb</p>
+<%= render 'layouts/translate_nav_menu' %>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= t(:english) %></th>
+      <th><%= t(:kannada) %></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @translated_authors.each do |trans_author| %>
+    <tr>
+      <td><%= trans_author.author.name %></td>
+      <td><%= trans_author.name %></td>
+      <td>
+        <%= link_to t(:edit), edit_author_author_translation_path(trans_author.author, trans_author) %>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= will_paginate @translated_authors %>
