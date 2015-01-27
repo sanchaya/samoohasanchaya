@@ -1,5 +1,8 @@
 class PublisherTranslationsController < ApplicationController
+  before_action :authenticate_user!, except: [:index, :new, :create]
   def index
+    translated_publishers = PublisherTranslation
+    @translated_publishers = translated_publishers.paginate(:page => params[:page], :per_page => 30)
   end
 
   def new
@@ -8,6 +11,8 @@ class PublisherTranslationsController < ApplicationController
   end
 
   def edit
+    @publisher = Publisher.find(params['publisher_id'])
+    @translate = @publisher.publisher_translations.find(params[:id])
   end
 
   def create
@@ -24,6 +29,18 @@ class PublisherTranslationsController < ApplicationController
       end
     end
   end 
+  
+  def update
+    @publisher = Publisher.find(params['publisher_id'])
+    @translate = @publisher.publisher_translations.find(params[:id])
+    respond_to do |format|
+      if @translate.update_attributes(publisher_translation_params)
+        format.html { redirect_to root_path, notice: 'Publisher was successfully translated.' }
+      else
+        format.html { render :edit }
+      end
+    end
+  end
 
   private
     # Never trust parameters from the scary internet, only allow the white list through.
