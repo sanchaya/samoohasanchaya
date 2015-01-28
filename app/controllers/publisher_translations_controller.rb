@@ -21,7 +21,7 @@ class PublisherTranslationsController < ApplicationController
     @translate.language_id = Language.kannada.id
     respond_to do |format|
       if @translate.save
-        format.html { redirect_to root_path, notice: 'Publisher was successfully translated.' }
+        format.html { redirect_to root_path, notice: 'ಪ್ರಕಾಶಕರ ಹೆಸರನ್ನು ಯಶಸ್ವಿಯಾಗಿ ಕನ್ನಡೀಕರಿಸಲಾಯ್ತು.' }
         format.json { render :show, status: :ok, location: @publisher }
       else
         format.html { render :new }
@@ -35,7 +35,7 @@ class PublisherTranslationsController < ApplicationController
     @translate = @publisher.publisher_translations.find(params[:id])
     respond_to do |format|
       if @translate.update_attributes(publisher_translation_params)
-        format.html { redirect_to root_path, notice: 'Publisher was successfully translated.' }
+        format.html { redirect_to root_path, notice: 'ಪ್ರಕಾಶಕರ ಹೆಸರನ್ನು ಯಶಸ್ವಿಯಾಗಿ ಕನ್ನಡೀಕರಿಸಲಾಯ್ತು.' }
       else
         format.html { render :edit }
       end

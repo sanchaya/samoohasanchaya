@@ -21,7 +21,7 @@ class AuthorTranslationsController < ApplicationController
     @translate.language_id = Language.kannada.id
     respond_to do |format|
       if @translate.save
-        format.html { redirect_to root_path, notice: 'Author was successfully translated.' }
+        format.html { redirect_to root_path, notice: 'ಲೇಖಕರ ಹೆಸರನ್ನು ಯಶಸ್ವಿಯಾಗಿ ಕನ್ನಡೀಕರಿಸಲಾಯ್ತು.' }
         format.json { render :show, status: :ok, location: @author }
       else
         format.html { render :new }
@@ -35,7 +35,7 @@ class AuthorTranslationsController < ApplicationController
    @translate = @author.author_translations.find(params[:id])
    respond_to do |format|
     if @translate.update_attributes(author_translation_params)
-      format.html { redirect_to root_path, notice: 'Author was successfully translated.' }
+      format.html { redirect_to root_path, notice: 'ಲೇಖಕರ ಹೆಸರನ್ನು ಯಶಸ್ವಿಯಾಗಿ ಕನ್ನಡೀಕರಿಸಲಾಯ್ತು.' }
     else
       format.html { render :edit }
     end
