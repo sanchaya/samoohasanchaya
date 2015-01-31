@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   get '/about_us' => 'homes#about_us', as: :about_us
   get '/help' => 'homes#help'
   get '/contact' => 'homes#contact'
-
+  get '/search' => 'books#search'
   devise_for :users
 # Clean below code. Use rails 4 new feature to avoide duplications
 resources :publishers do

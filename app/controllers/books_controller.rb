@@ -55,6 +55,14 @@ class BooksController < ApplicationController
   end
 
 
+  def search
+    @books = Book.search_books(params[:search])
+    respond_to do |format|
+      format.html { redirect_to books_url, notice: 'Book was successfully destroyed.' }
+      format.json { render json: @books }
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_book
