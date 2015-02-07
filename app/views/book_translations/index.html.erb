@@ -1,23 +1,21 @@
-<%= render 'layouts/translate_nav_menu' %>
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th><%= t(:english) %></th>
-      <th><%= t(:kannada) %></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @translated_books.each do |trans_book| %>
-    <tr>
-      <td><%= trans_book.book.book_title %></td>
-      <td><%= trans_book.book_title %></td>
-      <td>
-        <%= link_to t(:edit), edit_book_book_translation_path(trans_book.book, trans_book) %>
-      </td>
-    </tr>
+<div class="row"> 
+  <div class="col-lg-5">
+    <%= form_for [@book,@translate],  :html => { :class => "book" } do |f| %>
+    <div class="form-group">
+      <%= f.text_field :book_title, :class => 'form-control kan-ime' %>
+    </div>
+    <div class="form-group">
+      <%= text_field_tag :author, @author.name, :class => 'form-control kan-ime' %>
+    </div>
+    <div class="form-group">
+      <%= text_field_tag :publisher, @publisher.name,  :class => 'form-control kan-ime' %>
+    </div>
+    <div class="form-group">
+      <%= link_to(clean_link(@book.book_description.link), target: '_blank') do %> <%= fa_icon "book 2x" %> <% end %>
+      <%= f.submit t(:translate), class: "btn btn-default"%> 
+    </div>
     <% end %>
-  </tbody>
-</table>
-
-<%= will_paginate @translated_books %>
+  </div>
+  <div class="col-lg-4">
+  </div>
+</div>

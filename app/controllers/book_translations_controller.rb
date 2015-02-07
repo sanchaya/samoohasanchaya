@@ -1,8 +1,11 @@
 class BookTranslationsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :new, :create]
   def index
-    translated_books = BookTranslation
-    @translated_books = translated_books.paginate(:page => params[:page], :per_page => 30)
+    translated_books = BookTranslation.where("reviewed is null or reviewed = false").order('RAND()')
+    @translate = translated_books.first
+    @book = @translate.book
+    @author = @book.author.author_translations.first ? @book.author.author_translations.first : @book.author 
+    @publisher = @book.publisher.publisher_translations.first ? @book.publisher.publisher_translations.first : @book.publisher
   end
 
   def new
@@ -37,8 +40,11 @@ end
 def update
   @book = Book.find(params['book_id'])
   @translate = @book.book_translations.find(params[:id])
+  @translate.reviewed = true
+  @translate.user_id = current_user.id
   respond_to do |format|
     if @translate.update_attributes(book_translation_params)
+      save_author_publisher
       format.html { redirect_to root_path, notice: 'ಪುಸ್ತಕದ ಹೆಸರನ್ನು ಯಶಸ್ವಿಯಾಗಿ ಕನ್ನಡೀಕರಿಸಲಾಯ್ತು.' }
     else
       format.html { render :edit }
@@ -59,5 +65,14 @@ private
     # Never trust parameters from the scary internet, only allow the white list through.
     def book_translation_params
       params.require(:book_translation).permit(:book_title)
+    end
+
+    def save_author_publisher
+      @author = @book.author.author_translations.first ? @book.author.author_translations.first : @book.author.author_translations.new 
+      @publisher = @book.publisher.publisher_translations.first ? @book.publisher.publisher_translations.first : @book.publisher.publisher_translations.new
+      @author.name = params[:author]
+      @author.save
+      @publisher.name = params[:publisher]
+      @publisher.save
     end
   end

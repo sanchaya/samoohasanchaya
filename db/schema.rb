@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(version: 20150207203344) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "reviewed"
   end
 
   create_table "books", force: true do |t|
@@ -60,7 +61,6 @@ ActiveRecord::Schema.define(version: 20150207203344) do
     t.integer  "language_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "reviewed"
   end
 
   create_table "languages", force: true do |t|
