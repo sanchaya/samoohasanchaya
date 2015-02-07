@@ -2,6 +2,8 @@ class BookTranslationsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :new, :create]
   def index
     translated_books = BookTranslation.where("reviewed is null or reviewed = false").order('RAND()')
+    @reviewed_count = translated_books.count
+    @unreviewed_count = BookTranslation.count - @reviewed_count
     @translate = translated_books.first
     @book = @translate.book
     @author = @book.author.author_translations.first ? @book.author.author_translations.first : @book.author 
@@ -45,7 +47,7 @@ def update
   respond_to do |format|
     if @translate.update_attributes(book_translation_params)
       save_author_publisher
-      format.html { redirect_to root_path, notice: 'ಪುಸ್ತಕದ ಹೆಸರನ್ನು ಯಶಸ್ವಿಯಾಗಿ ಕನ್ನಡೀಕರಿಸಲಾಯ್ತು.' }
+      format.html { redirect_to book_translations_path, notice: 'ಪುಸ್ತಕದ ಹೆಸರನ್ನು ಯಶಸ್ವಿಯಾಗಿ ಕನ್ನಡೀಕರಿಸಲಾಯ್ತು.' }
     else
       format.html { render :edit }
     end
