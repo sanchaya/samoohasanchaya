@@ -1,5 +1,5 @@
 class BookTranslationsController < ApplicationController
-  before_action :authenticate_user!, except: [:index, :new, :create]
+  before_action :authenticate_user!, except: [ :new, :create]
   def index
     translated_books = BookTranslation.where("reviewed is null or reviewed = false").order('RAND()')
     @reviewed_count = translated_books.count
