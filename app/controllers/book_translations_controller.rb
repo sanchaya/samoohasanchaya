@@ -1,13 +1,15 @@
 class BookTranslationsController < ApplicationController
   before_action :authenticate_user!, except: [ :new, :create]
   def index
-    translated_books = BookTranslation.where("reviewed is null or reviewed = false").order('RAND()')
-    @reviewed_count = translated_books.count
+    @translated_books = BookTranslation.where("reviewed is null or reviewed = false").order('RAND()')
+    @reviewed_count = @translated_books.count
     @unreviewed_count = BookTranslation.count - @reviewed_count
-    @translate = translated_books.first
-    @book = @translate.book
-    @author = @book.author.author_translations.first ? @book.author.author_translations.first : @book.author 
-    @publisher = @book.publisher.publisher_translations.first ? @book.publisher.publisher_translations.first : @book.publisher
+    @translate = @translated_books.first
+    if @translate
+      @book = @translate.book
+      @author = @book.author.author_translations.first ? @book.author.author_translations.first : @book.author 
+      @publisher = @book.publisher.publisher_translations.first ? @book.publisher.publisher_translations.first : @book.publisher
+    end
   end
 
   def new
