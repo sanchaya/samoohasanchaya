@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141209195405) do
+ActiveRecord::Schema.define(version: 20150207203344) do
 
   create_table "author_translations", force: true do |t|
     t.integer  "user_id"
@@ -60,6 +60,7 @@ ActiveRecord::Schema.define(version: 20141209195405) do
     t.integer  "language_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "reviewed"
   end
 
   create_table "languages", force: true do |t|
