@@ -77,3 +77,9 @@ We need to fix this later and remove below css
 .into-header {
 	font-weight: bold;
 }
+
+.pustaka-intro-text {
+	 margin: auto;
+    text-align: center;
+    width: 90%;
+}
