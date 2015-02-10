@@ -92,7 +92,3 @@ We need to fix this later and remove below css
 .submit-row {
 	float: right;
 }
-.submit-row .book-link {
-	 float: left;
-    margin: 5px;
-}
