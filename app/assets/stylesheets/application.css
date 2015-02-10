@@ -79,7 +79,20 @@ We need to fix this later and remove below css
 }
 
 .pustaka-intro-text {
-	 margin: auto;
-    text-align: center;
-    width: 90%;
+	margin: auto;
+	text-align: center;
+	width: 90%;
+}
+
+.edit-translation-form {
+	margin: auto;
+	width: 50%;
+}
+
+.submit-row {
+	float: right;
+}
+.submit-row .book-link {
+	 float: left;
+    margin: 5px;
 }
