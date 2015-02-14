@@ -92,3 +92,14 @@ We need to fix this later and remove below css
 .submit-row {
 	float: right;
 }
+
+/* span tag for color div */
+.blue-completed {
+	color: blue;
+}
+.green-progress {
+	color: green;
+}
+.darkgoldenrod-future {
+	color: darkgoldenrod;
+}

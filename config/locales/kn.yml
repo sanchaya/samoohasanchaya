@@ -1,6 +1,6 @@
 kn:
-  translate: 'ಲಿಪ್ಯಂತರಿಸಿ'
-  translated: 'ಲಿಪ್ಯಂತರಿಸಿದವು'
+  translate: 'ಕನ್ನಡೀಕರಿಸು'
+  translated: 'ಕನ್ನಡೀಕರಿಸಿದವು'
   samooha: 'ಸಮೂಹ'
   samooha_sanchaya: 'ಸಮೂಹ ಸಂಚಯ'
   show: 'ತೋರಿಸು'
@@ -12,6 +12,10 @@ kn:
   sign_in: 'ಪ್ರವೇಶಿಸು'
   help: 'ಸಹಾಯ'
   contact: 'ಸಂಪರ್ಕಿಸಿ'
+  plannings: 'ಯೋಜನೆಗಳು'
+  osmania: 'ಓಸ್ಮಾನಿಯ ವಿಶ್ವವಿದ್ಯಾನಿಲಯ ಡಿಜಿಟಲ್ ಲೈಬ್ರರಿ'
+  fuel: 'FUEL ಯೋಜನೆ'
+  dli: 'ಡಿಜಿಟಲ್ ಲೈಬ್ರರಿ ಆಫ್ ಇಂಡಿಯಾ'
 
   # Home
   book: 'ಪುಸ್ತಕ'

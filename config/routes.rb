@@ -4,6 +4,9 @@ Rails.application.routes.draw do
   get '/help' => 'homes#help'
   get '/contact' => 'homes#contact'
   get '/search' => 'books#search'
+  get '/osmania' => 'homes#osmania'
+  get '/dli' => 'homes#dli'
+  get '/fuel' => 'homes#fuel'
   devise_for :users
 # Clean below code. Use rails 4 new feature to avoide duplications
 resources :publishers do
