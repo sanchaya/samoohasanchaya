@@ -3,13 +3,16 @@
   <div class="edit-translation-form">
     <%= form_for [@book,@translate],  :html => { :class => "book" } do |f| %>
     <div class="form-group">
-      <%= f.text_field :book_title, :class => 'form-control kan-ime' %>
+      <%= label_tag :book, t(:book), class: 'review-label' %> :
+      <%= f.text_field :book_title, :class => 'form-control kan-ime review-field' %>
     </div>
     <div class="form-group">
-      <%= text_field_tag :author, @author.name, :class => 'form-control kan-ime' %>
+      <%= label_tag :author, t(:author), class: 'review-label' %> :
+      <%= text_field_tag :author, @author.name, :class => 'form-control kan-ime review-field' %>
     </div>
     <div class="form-group">
-      <%= text_field_tag :publisher, @publisher.name,  :class => 'form-control kan-ime' %>
+      <%= label_tag :publisher, t(:publisher), class: 'review-label' %> :
+      <%= text_field_tag :publisher, @publisher.name,  :class => 'form-control kan-ime review-field' %>
     </div>
     <div class="form-group submit-row">
       <%= link_to(clean_link(@book.book_description.link), target: '_blank') do %> <%= fa_icon "book 2x" %> <% end %>

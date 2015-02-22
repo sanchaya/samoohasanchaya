@@ -86,7 +86,17 @@ We need to fix this later and remove below css
 
 .edit-translation-form {
 	margin: auto;
-	width: 50%;
+	width: 60%;
+}
+
+.review-label {
+	margin-right: 1%;
+	width: 10%;
+}
+
+.review-field {
+	float: right;
+	width: 85%;
 }
 
 .submit-row {
