@@ -1,0 +1,57 @@
+<div class="chart-box"> 
+  <div id="review-container" style="width: 50%; height: 300px; margin: 0 auto"></div>
+</div>
+<script> 
+  $(function () {
+    $('#review-container').highcharts({
+      chart: {
+        type: 'column',
+        borderWidth: 1
+      },
+      title: {
+        text: ' ಕನ್ನಡೀಕರಣದ ಪರಿಶೀಲನೆಯ ಪ್ರಗತಿ'
+      },
+      credits: {
+        enabled: false
+      },
+      xAxis: {
+        categories: [
+        ' ಓಸ್ಮಾನಿಯ'
+        ]
+      },
+      yAxis: [{
+        min: 0,
+        title: {
+          text: ' '
+        }
+      }],
+      legend: {
+        shadow: false
+      },
+      tooltip: {
+        shared: true
+      },
+      plotOptions: {
+        column: {
+          grouping: false,
+          shadow: false,
+          borderWidth: 0
+        }
+      },
+      series: [{
+        name: 'ಕನ್ನಡಿಕರಿಸಬೇಕಾಗಿರುವುದು',
+        color: 'rgba(165,170,217,1)',
+        data: [<%= @translated_books_count %>],
+        pointPadding: 0.3,
+        pointPlacement: -0.2
+      }, {
+        name: 'ಕನ್ನಡಿಕರಿಸಲಾಗಿರುವುದು',
+        color: 'rgba(126,86,134,.9)',
+        data: [<%= @reviewed_books_count %>],
+        pointPadding: 0.4,
+        pointPlacement: -0.2
+      }]
+    });
+  });
+
+</script>

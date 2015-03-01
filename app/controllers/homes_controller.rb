@@ -3,6 +3,7 @@ class HomesController < ApplicationController
     @translated_authors_count = AuthorTranslation.count
     @translated_publishers_count = PublisherTranslation.count
     @translated_books_count = BookTranslation.count
+    @reviewed_books_count = BookTranslation.where(reviewed: true).count
     # Clean the below code
     # Use DRY
     # Move logics to Model
