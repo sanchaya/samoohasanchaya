@@ -1,7 +1,7 @@
 class DliBook < ActiveRecord::Base
-  has_many :dli_book_translations, dependent: :destroy
-  has_one :dli_book_description, dependent: :destroy
+  has_many :book_translations, dependent: :destroy, foreign_key: 'book_id', class_name: 'DliBookTranslation'
+  has_one :book_description, dependent: :destroy, foreign_key: 'book_id', class_name: 'DliBookDescription'
   belongs_to :language
-  belongs_to :dli_author, foreign_key: 'author_id'
-  belongs_to :dli_publisher, foreign_key: 'publisher_id'
+  belongs_to :author, foreign_key: 'author_id', class_name: 'Author'
+  belongs_to :publisher, foreign_key: 'publisher_id', class_name: 'Publisher'
 end

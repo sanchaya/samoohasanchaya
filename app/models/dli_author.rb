@@ -1,4 +1,4 @@
 class DliAuthor < ActiveRecord::Base
-  has_many :dli_author_translations, dependent: :destroy
-  has_many :dli_books, foreign_key: 'author_id'
+  has_many :author_translations, foreign_key: 'author_id',class_name: 'DliAuthorTranslation', dependent: :destroy
+  has_many :books, foreign_key: 'author_id',class_name: 'DliBook'
 end

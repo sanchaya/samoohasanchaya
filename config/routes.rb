@@ -20,6 +20,18 @@ end
 resources :books do 
   resources :book_translations, only: [:new, :create, :edit, :update]
 end
+# Dli resources
+# try to make it dynamic for all books
+resources :dli_books do 
+  resources :dli_book_translations, only: [:new, :create, :edit, :update]
+end
+resources :dli_publishers do
+  resources :dli_publisher_translations, only: [:new, :create, :edit, :update]
+end
+
+resources :dli_authors do
+  resources :dli_author_translations, only: [:new, :create, :edit, :update]
+end
 
 resources :book_translations, only: [:index, :show, :destroy]
 resources :author_translations, only: [:index, :show, :destroy]
@@ -29,7 +41,7 @@ resources :publisher_translations, only: [:index, :show, :destroy]
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'homes#index'
+  root 'dli_books#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
