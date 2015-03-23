@@ -69,6 +69,7 @@ We need to fix this later and remove below css
 
 /*Introduction to samooha on landing page text*/
 .intoduction-text {
+	clear: both;
 	margin: auto;
 	text-align: center;
 	width: 90%;
@@ -79,6 +80,7 @@ We need to fix this later and remove below css
 }
 
 .pustaka-intro-text {
+	clear: both;
 	margin: auto;
 	text-align: center;
 	width: 90%;
