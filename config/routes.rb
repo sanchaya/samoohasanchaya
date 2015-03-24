@@ -41,7 +41,7 @@ resources :publisher_translations, only: [:index, :show, :destroy]
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'homes#index'
+  root 'dli_books#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

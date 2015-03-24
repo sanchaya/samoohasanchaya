@@ -1,5 +1,10 @@
 class DliBooksController < ApplicationController
-    def index
+  def index
+    @os_translated_authors_count = AuthorTranslation.count
+    @os_translated_publishers_count = PublisherTranslation.count
+    @os_translated_books_count = BookTranslation.count
+    @os_reviewed_books_count = BookTranslation.where(reviewed: true).count
+
     @translated_authors_count = DliAuthorTranslation.count
     @translated_publishers_count = DliPublisherTranslation.count
     @translated_books_count = DliBookTranslation.count
@@ -22,5 +27,5 @@ class DliBooksController < ApplicationController
     @authors = DliAuthor.where("id not in (?)", translated_authors.blank? ? [0] : translated_authors ).order('RAND()')
     @author = @authors.first
     @translate_author = @author.author_translations.new if @author
-end
+  end
 end
