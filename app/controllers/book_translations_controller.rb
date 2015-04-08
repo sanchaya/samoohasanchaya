@@ -4,8 +4,8 @@ class BookTranslationsController < ApplicationController
     @translated_books = BookTranslation.where("reviewed is null or reviewed = false").order('RAND()')
     @reviewed_count = @translated_books.count
     @unreviewed_count = BookTranslation.count - @reviewed_count
-    @translated_books_count = BookTranslation.count
-    @reviewed_books_count = BookTranslation.where(reviewed: true).count
+    @os_translated_books_count = BookTranslation.count
+    @os_reviewed_books_count = BookTranslation.where(reviewed: true).count
     @translate = @translated_books.first
     if @translate
       @book = @translate.book
