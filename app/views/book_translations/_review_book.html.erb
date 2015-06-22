@@ -15,7 +15,7 @@
       <%= text_field_tag :publisher, @publisher.name,  :class => 'form-control kan-ime review-field' %>
     </div>
     <div class="form-group submit-row">
-      <%= link_to(clean_link(@book.book_description.link), target: '_blank') do %> <%= fa_icon "book 2x" %> <% end %>
+      <%= link_to(reader_sanchaya_link(@book), target: '_blank') do %> <%= fa_icon "book 2x" %> <% end %>
       <%= f.submit t(:reviewed), class: "btn btn-default"%> 
       <%= link_to t(:skip), dli_book_translations_path, class: "btn btn-default"%> 
     </div>
