@@ -37,6 +37,9 @@ resources :book_translations, only: [:index, :show, :destroy]
 resources :author_translations, only: [:index, :show, :destroy]
 resources :publisher_translations, only: [:index, :show, :destroy]
 
+resources :dli_book_translations, only: [:index, :show, :destroy]
+resources :dli_author_translations, only: [:index, :show, :destroy]
+resources :dli_publisher_translations, only: [:index, :show, :destroy]
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
