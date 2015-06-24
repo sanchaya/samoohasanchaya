@@ -1,4 +1,5 @@
 class DliBookTranslationsController < ApplicationController
+  before_action :authenticate_user!, except: [ :new, :create]
   def index
     @translated_books = DliBookTranslation.where("reviewed is null or reviewed = false").order('RAND()')
     @reviewed_count = @translated_books.count
