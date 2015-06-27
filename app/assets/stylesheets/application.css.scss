@@ -15,6 +15,11 @@
  *= require font-awesome
  */
 
+ @import url(http://fonts.googleapis.com/earlyaccess/notosanskannada.css);
+
+ body, p, ol, ul, td {
+ 	font-family: 'Noto Sans Kannada', serif !important;
+ }
 
  .circle-div {
  	width:100%;
