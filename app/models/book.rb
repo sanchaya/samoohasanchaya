@@ -1,6 +1,8 @@
 class Book < ActiveRecord::Base
   has_many :book_translations, dependent: :destroy
   has_one :book_description, dependent: :destroy
+  has_many :categories, :through => :book_categories
+  has_many :book_categories
   belongs_to :language
   belongs_to :author
   belongs_to :publisher
