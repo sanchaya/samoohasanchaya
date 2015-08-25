@@ -66,3 +66,14 @@ task :Update_nil_as_noname => :environment do
     end
   end
 end
+
+
+desc "Import category and translations"
+task :import_category => :environment do
+  file_name = Rails.root.to_s + '/lib/category.csv'
+  puts "started"
+  CSV.foreach(file_name, :col_sep => "\t", :headers=> true) do |row|
+    p "#{row[0]} == #{row[2]}"
+    Category.create(name: row[0], kn: row[1])  unless Category.find_by(name: row[0]) 
+  end
+end
