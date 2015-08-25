@@ -69,11 +69,49 @@ end
 
 
 desc "Import category and translations"
-task :import_category => :environment do
+task :import_category1 => :environment do
   file_name = Rails.root.to_s + '/lib/category.csv'
   puts "started"
   CSV.foreach(file_name, :col_sep => "\t", :headers=> true) do |row|
     p "#{row[0]} == #{row[2]}"
+    Category.create(name: row[0], kn: row[2])  unless Category.find_by(name: row[0]) 
+  end
+end
+
+desc "Import category and translations"
+task :import_category2 => :environment do
+  file_name = Rails.root.to_s + '/lib/category1.csv'
+  puts "started"
+  CSV.foreach(file_name, :col_sep => "\t", :headers=> true) do |row|
+    p "#{row[0]} == #{row[1]}"
     Category.create(name: row[0], kn: row[1])  unless Category.find_by(name: row[0]) 
+  end
+end
+
+
+desc "Assign association"
+task :assign_association1 => :environment do
+  BookDescription.find_each do |book|
+    p ">>>>>>>>>>>>>>>>>>>>>>>>>>"
+    p book
+    book.subjects.split(';').each do |sub|
+      cat = Category.find_or_create_by(name: sub)
+      BookCategory.create(book_id: book.book_id, category_id: cat.id)  
+    end
+  end
+end
+
+desc "Assign association"
+task :assign_association2 => :environment do
+  DliBookDescription.find_each do |book|
+    p ">>>>>>>>>>>>>>>>>>>>>>>>>>"
+    p book
+    subject = book.subject
+    cat = if subject 
+      Category.find_or_create_by(name: subject)
+    else
+      Category.find_by(name: 'NULL')
+    end
+    DliBookCategory.create(dli_book_id: book.book_id, category_id: cat.id)  
   end
 end
