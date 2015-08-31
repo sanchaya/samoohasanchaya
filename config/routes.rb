@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get '/categories' => 'categories#index'
+  get 'categories/:id' => 'categories#show'
   get 'homes/index'
   get '/about_us' => 'homes#about_us', as: :about_us
   get '/help' => 'homes#help'
