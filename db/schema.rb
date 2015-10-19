@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150825191634) do
+ActiveRecord::Schema.define(version: 20151019173526) do
 
   create_table "author_translations", force: true do |t|
     t.integer  "user_id"
@@ -116,7 +116,7 @@ ActiveRecord::Schema.define(version: 20150825191634) do
     t.string   "barcode"
     t.string   "copyright"
     t.string   "rights"
-    t.date     "year"
+    t.integer  "year"
     t.integer  "pages"
     t.string   "url"
     t.integer  "no_of_pages"
@@ -193,6 +193,38 @@ ActiveRecord::Schema.define(version: 20150825191634) do
   create_table "languages", force: true do |t|
     t.string   "name"
     t.string   "language_code"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "libraries", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "library_authors", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "library_books", force: true do |t|
+    t.integer  "library_id"
+    t.integer  "library_author_id"
+    t.integer  "library_publisher_id"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "library_books", ["library_author_id"], name: "index_library_books_on_library_author_id", using: :btree
+  add_index "library_books", ["library_id"], name: "index_library_books_on_library_id", using: :btree
+  add_index "library_books", ["library_publisher_id"], name: "index_library_books_on_library_publisher_id", using: :btree
+  add_index "library_books", ["name"], name: "index_library_books_on_name", using: :btree
+
+  create_table "library_publishers", force: true do |t|
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

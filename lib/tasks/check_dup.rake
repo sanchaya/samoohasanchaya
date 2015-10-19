@@ -14,7 +14,27 @@ task :add_extra_books_from_csv => :environment do
 end
 
 
-
+desc "update year in dli"
+task :update_dli_year => :environment do
+ file_name = Rails.root.to_s + '/lib/booksinfo.csv'
+ exising = []
+ non_existing = []
+ CSV.foreach(file_name, :col_sep=> ',', :headers => true) do |row|
+  dli =  DliBookDescription.find_by(barcode: row['BarCode'])
+  if dli 
+    p row['Year']
+    dli.year = row['Year']
+    dli.save
+    exising << dli.id
+  else
+    non_existing << row['BarCode']
+  end 
+end
+p "-------------------EXISTING----------------"
+p exising
+p "-------------------non_existing----------------"
+p non_existing
+end
 
 desc "Check missed and duplicate books"
 task :check_dup_books_from_csv => :environment do
