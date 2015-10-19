@@ -57,10 +57,13 @@ class Book < ActiveRecord::Base
 end
 
 def self.create_master 
+  # ActiveRecord::Base.connection.execute("
+  #   drop VIEW master_books
+  #   ")
    # BookTranslation.joins(:book, :book_description).select("book_translations.book_title AS book_title, books.id AS book_id, book_descriptions.link AS link").where("book_translations.book_title like ?", "%#{keyword}%")
    ActiveRecord::Base.connection.execute("
     CREATE VIEW master_books AS
-    select bt.book_title as name,at.name as author,pt.name as publisher, 'osmania' as library,  bd.link from book_translations bt
+    select bt.book_title as name,at.name as author,pt.name as publisher, 'osmania' as library,bd.date_issued as year,  bd.link from book_translations bt
     inner join books b
     on bt.book_id = b.id
     inner join authors a
@@ -75,7 +78,7 @@ def self.create_master
     on pt.publisher_id = p.id
 
     UNION ALL
-    select dbt.book_title as name,dat.name as author,dpt.name as publisher,'dli' as library, dbd.link from dli_book_translations dbt
+    select dbt.book_title as name,dat.name as author,dpt.name as publisher,'dli' as library,dbd.year as year, dbd.link from dli_book_translations dbt
     inner join dli_books db
     on dbt.book_id = db.id
     inner join dli_authors da
