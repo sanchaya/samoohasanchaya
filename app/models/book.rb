@@ -19,7 +19,7 @@ class Book < ActiveRecord::Base
 
   def self.category_books(category)
     ActiveRecord::Base.connection.execute("
-      select bt.book_title as name,at.name as author,pt.name as publisher, 'osmania' as library,  bd.link from book_translations bt
+      select bt.book_title as name,at.name as author,pt.name as publisher, 'osmania' as library,bd.date_issued as year,  bd.link from book_translations bt
       inner join books b
       on bt.book_id = b.id
       inner join authors a
@@ -37,7 +37,7 @@ class Book < ActiveRecord::Base
       where bc.category_id = #{category}
 
       UNION ALL
-      select dbt.book_title as name,dat.name as author,dpt.name as publisher,'dli' as library, dbd.link from dli_book_translations dbt
+      select dbt.book_title as name,dat.name as author,dpt.name as publisher,'dli' as library,dbd.year as year, dbd.link from dli_book_translations dbt
       inner join dli_books db
       on dbt.book_id = db.id
       inner join dli_authors da
