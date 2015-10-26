@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151019173526) do
+ActiveRecord::Schema.define(version: 20151026190930) do
 
   create_table "author_translations", force: true do |t|
     t.integer  "user_id"
@@ -190,6 +190,38 @@ ActiveRecord::Schema.define(version: 20151019173526) do
     t.datetime "updated_at"
   end
 
+  create_table "fuel_modules", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "fuel_modules", ["name"], name: "index_fuel_modules_on_name", using: :btree
+
+  create_table "fuel_translations", force: true do |t|
+    t.integer  "language_id"
+    t.integer  "user_id"
+    t.integer  "fuel_word_id"
+    t.string   "name"
+    t.text     "context"
+    t.integer  "vote"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "fuel_translations", ["name"], name: "index_fuel_translations_on_name", using: :btree
+
+  create_table "fuel_words", force: true do |t|
+    t.integer  "language_id"
+    t.integer  "fuel_module_id"
+    t.string   "name"
+    t.text     "context"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "fuel_words", ["name"], name: "index_fuel_words_on_name", using: :btree
+
   create_table "languages", force: true do |t|
     t.string   "name"
     t.string   "language_code"
@@ -234,6 +266,7 @@ ActiveRecord::Schema.define(version: 20151019173526) do
     t.string "author"
     t.string "publisher"
     t.string "library",   limit: 7, default: "", null: false
+    t.string "year"
     t.string "link"
   end
 
