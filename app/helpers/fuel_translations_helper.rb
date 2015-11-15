@@ -1,0 +1,2 @@
+module FuelTranslationsHelper
+end

@@ -27,6 +27,7 @@ kn:
   publishers: 'ಪ್ರಕಾಶಕರು'
   author: 'ಲೇಖಕ/ಕಿ'
   authors: 'ಲೇಖಕ/ಕಿಯರು'
+  word: 'ಪದ'
   # Books
   author: 'ಲೇಖಕ'
   book_title: 'ಪುಸ್ತಕದ ಹೆಸರು'

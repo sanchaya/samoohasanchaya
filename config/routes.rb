@@ -10,6 +10,9 @@ Rails.application.routes.draw do
   get '/dli' => 'homes#dli'
   get '/fuel' => 'homes#fuel'
   devise_for :users
+  resources :fuel_words do
+    resources :fuel_translations, only: [:new, :create, :edit, :update]
+  end 
 # Clean below code. Use rails 4 new feature to avoide duplications
 resources :publishers do
   resources :publisher_translations, only: [:new, :create, :edit, :update]
@@ -46,7 +49,7 @@ resources :dli_publisher_translations, only: [:index, :show, :destroy]
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'dli_books#index'
+  root 'fuel_words#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
