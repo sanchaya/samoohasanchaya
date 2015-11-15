@@ -2,6 +2,7 @@
 <%= form_for [@word,@word_translate],  :html => { :class => "book" } do |f| %>
 <div class="form-group">
   <%= label_tag :name ,@word.name, :class => 'form-control'%>
+  (<%= @word.context %>)
 </div>
 <div class="form-group">
   <%= f.text_field :name, :class => 'form-control kan-ime' %>

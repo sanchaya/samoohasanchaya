@@ -28,50 +28,16 @@ $( document ).ready( function () {
 	$( '.kan-ime' ).ime();
 
 // validatin added for book translation form
-$("#new_book_translation").validate({
+$("#new_fuel_translation").validate({
 	rules:{
 
-		"book_translation[book_title]":
+		"fuel_translation[name]":
 		{
 			required: true
 		}
 	},
 	messages:{
-		"book_translation[book_title]":
-		{
-			required: "ದಯವಿಟ್ಟು ಪದವನ್ನು ಬೆರಳಚ್ಚು ಮಾಡಿ"
-		}
-	}
-});
-
-// validatin added for publisher translation form
-$("#new_publisher_translation").validate({
-	rules:{
-
-		"publisher_translation[name]":
-		{
-			required: true
-		}
-	},
-	messages:{
-		"publisher_translation[name]":
-		{
-			required: "ದಯವಿಟ್ಟು ಪದವನ್ನು ಬೆರಳಚ್ಚು ಮಾಡಿ"
-		}
-	}
-});
-
-// validatin added for author translation form
-$("#new_author_translation").validate({
-	rules:{
-
-		"author_translation[name]":
-		{
-			required: true
-		}
-	},
-	messages:{
-		"author_translation[name]":
+		"fuel_translation[name]":
 		{
 			required: "ದಯವಿಟ್ಟು ಪದವನ್ನು ಬೆರಳಚ್ಚು ಮಾಡಿ"
 		}

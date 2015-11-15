@@ -5,6 +5,7 @@ class FuelWord < ActiveRecord::Base
 
   def self.not_translated
     translated = FuelTranslation.pluck('fuel_word_id').uniq
+    translated = [0] if translated.blank?
     FuelWord.where("id not in (?)", translated).order('RAND()').first
   end
 end
