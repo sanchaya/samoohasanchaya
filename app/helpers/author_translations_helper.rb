@@ -1,2 +1,0 @@
-module AuthorTranslationsHelper
-end
