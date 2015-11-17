@@ -8,6 +8,7 @@ class FuelWordsController < ApplicationController
     @reviewed_books_count = DliBookTranslation.where(reviewed: true).count
     @word = FuelWord.not_translated
     @module = @word.fuel_module if @word
+    @word_translates =  @word.fuel_translations
     @word_translate = @word.fuel_translations.new if @word
   end
 

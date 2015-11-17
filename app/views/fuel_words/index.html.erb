@@ -3,6 +3,22 @@
 <div class="translation-tree"> 
   <div class="row">
     <div class="col-md-12"> 
+      <%= label_tag :name ,@word.name, :class => 'form-control'%>
+      (<%= @word.context %>)
+    </div>
+
+    <% @word_translates.each do |translate| %>
+    <% if translate.name %>
+    <div class="col-md-12"> 
+      <div class='form-control'> 
+        <%= translate.name %>
+      </div>
+    </div>
+    <% end %>
+    <% end %>
+    
+
+    <div class="col-md-12"> 
       <%= render 'fuel_form' %>
     </div>
   </div>
