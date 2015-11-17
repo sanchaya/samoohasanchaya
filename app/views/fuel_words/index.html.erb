@@ -3,11 +3,16 @@
 <% if current_user %>
 <div class="translation-tree"> 
   <div class="row">
+  
     <div class="col-md-12"> 
-     <h3> <%= @word.name %>: <%= @word.context %> </h3>
+      <h4> <%= @word.name %>: <%= @word.context %> </h4>
     </div>
 
-    <%= render 'vote_translation' %>
+    <hr />
+
+    <div class="vote_translation"> 
+      <%= render 'vote_translation' %>
+    </div>
 
     <div class="col-md-12"> 
       <%= render 'fuel_form' %>
