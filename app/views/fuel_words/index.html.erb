@@ -1,28 +1,20 @@
 <%= render 'homes/intro' %>
 
+<% if current_user %>
 <div class="translation-tree"> 
   <div class="row">
     <div class="col-md-12"> 
-      <%= label_tag :name ,@word.name, :class => 'form-control'%>
-      (<%= @word.context %>)
+     <h3> <%= @word.name %>: <%= @word.context %> </h3>
     </div>
 
-    <% @word_translates.each do |translate| %>
-    <% if translate.name %>
-    <div class="col-md-12"> 
-      <div class='form-control'> 
-        <%= translate.name %>
-      </div>
-    </div>
-    <% end %>
-    <% end %>
-    
+    <%= render 'vote_translation' %>
 
     <div class="col-md-12"> 
       <%= render 'fuel_form' %>
     </div>
+
   </div>
 </div>
-<%#= render 'circles' %>
+<% end %>
 
 <%= render 'homes/review_progress' %>

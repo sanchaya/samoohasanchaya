@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151026190930) do
+ActiveRecord::Schema.define(version: 20151117180211) do
 
   create_table "author_translations", force: true do |t|
     t.integer  "user_id"
@@ -319,5 +319,14 @@ ActiveRecord::Schema.define(version: 20151026190930) do
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+
+  create_table "vote_translations", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "fuel_translation_id"
+    t.integer  "fuel_word_id"
+    t.boolean  "value"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end

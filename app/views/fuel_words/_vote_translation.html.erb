@@ -1,0 +1,15 @@
+ <hr />
+ Vote for translations
+
+ <% @word_translates.each do |translate| %>
+ <% if translate.name %>
+ <div class="col-md-12"> 
+  <div> 
+    <%= translate.name %>
+    <%= link_to vote_translation_fuel_translation_path(translate,fuel_word_id: @word),class: 'vote-link', remote: true do %>
+    <span class="vote <%= user_voted?(current_user, translate.id)%>"> </span>
+    <% end %>
+</div>
+</div>
+<% end %>
+<% end %>

@@ -12,6 +12,11 @@ class FuelTranslationsController < ApplicationController
   end
 end
 
+def vote_translation
+  VoteTranslation.create_update_vote(current_user, params[:id], params[:fuel_word_id])
+  render nothing: true
+end
+
 private
 
 def fuel_translation_params

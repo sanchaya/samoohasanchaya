@@ -12,4 +12,8 @@ module ApplicationHelper
     "http://reader.sanchaya.net/" + book.book_description.barcode if book.book_description
   end
 
+  def user_voted?(user,translation_id)
+    user.vote_translations.where(fuel_translation_id: translation_id).exists? ? 'on' : 'off'
+  end
+
 end

@@ -44,4 +44,16 @@ $("#new_fuel_translation").validate({
 	}
 });
 
+
+// Vote button 
+$(".vote-link").click(function(){
+
+	var x = document.getElementsByClassName("vote on");
+	var i;
+	for (i = 0; i < x.length; i++) { 
+		x[i].className = "vote off";
+	}
+	$( "span", this ).addClass( "vote on" );
+ // $(this).find(".vote").className = "vote on";
+});
 });

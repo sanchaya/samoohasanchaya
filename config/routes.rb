@@ -13,6 +13,11 @@ Rails.application.routes.draw do
   resources :fuel_words do
     resources :fuel_translations, only: [:new, :create, :edit, :update]
   end 
+  resources :fuel_translations do
+    member do
+      get 'vote_translation'
+    end
+  end
 # Clean below code. Use rails 4 new feature to avoide duplications
 resources :publishers do
   resources :publisher_translations, only: [:new, :create, :edit, :update]
