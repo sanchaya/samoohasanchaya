@@ -9,7 +9,7 @@ class FuelTranslationsController < ApplicationController
       if @word_translate.save
        @word = FuelWord.not_translated
        @module = @word.fuel_module if @word
-       @word_translates =  @word.fuel_translations
+       @word_translates =  @word.fuel_translations if @word
        @word_translate = @word.fuel_translations.new if @word
        format.html { redirect_to root_path, notice: 'Success' }
        format.js
