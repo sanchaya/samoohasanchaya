@@ -5,22 +5,26 @@ class FuelTranslationsController < ApplicationController
     @word_translate = @word.fuel_translations.new(fuel_translation_params)
     @word_translate.language_id = Language.kannada.id
     @word_translate.user_id = current_user.id
-    if @word_translate.save
-     redirect_to root_path, notice: 'ಪುಸ್ತಕದ ಹೆಸರನ್ನು ಯಶಸ್ವಿಯಾಗಿ ಕನ್ನಡೀಕರಿಸಲಾಯ್ತು.'
-   else
-    redirect_to root_path, notice: 'Failed'
+    respond_to do |format|
+      if @word_translate.save
+        format.html { redirect_to root_path, notice: 'ಪುಸ್ತಕದ ಹೆಸರನ್ನು ಯಶಸ್ವಿಯಾಗಿ ಕನ್ನಡೀಕರಿಸಲಾಯ್ತು.' }
+        format.js
+      else
+        redirect_to root_path, notice: 'Failed'
+      end
+    end
+
   end
-end
 
-def vote_translation
-  VoteTranslation.create_update_vote(current_user, params[:id], params[:fuel_word_id])
-  render nothing: true
-end
+  def vote_translation
+    VoteTranslation.create_update_vote(current_user, params[:id], params[:fuel_word_id])
+    render nothing: true
+  end
 
-private
+  private
 
-def fuel_translation_params
-  params.require(:fuel_translation).permit(:name)
-end
+  def fuel_translation_params
+    params.require(:fuel_translation).permit(:name)
+  end
 
 end

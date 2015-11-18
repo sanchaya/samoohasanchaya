@@ -1,24 +1,8 @@
 <%= render 'homes/intro' %>
 
 <% if current_user %>
-<div class="translation-tree"> 
-  <div class="row">
-  
-    <div class="col-md-12"> 
-      <h4> <%= @word.name %>: <%= @word.context %> </h4>
-    </div>
-
-    <hr />
-
-    <div class="vote_translation"> 
-      <%= render 'vote_translation' %>
-    </div>
-
-    <div class="col-md-12"> 
-      <%= render 'fuel_form' %>
-    </div>
-
-  </div>
+<div id='translation_part'>
+  <%= render 'translation_tree' %>
 </div>
 <% end %>
 
