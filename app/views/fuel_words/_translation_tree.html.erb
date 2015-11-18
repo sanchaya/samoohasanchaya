@@ -1,4 +1,6 @@
 <div class="translation-tree"> 
+  <% if @word %>
+
   <div class="row">
 
     <div class="col-md-12"> 
@@ -9,7 +11,7 @@
     <div class="col-md-12"> 
 
       <div class="vote_translation"> 
-      <%= render 'fuel_words/vote_translation' %>
+        <%= render 'fuel_words/vote_translation' %>
       </div>
     </div>
     <div class="col-md-12"> 
@@ -17,4 +19,5 @@
     </div>
 
   </div>
+  <% end %>
 </div>
