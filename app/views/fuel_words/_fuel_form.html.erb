@@ -1,7 +1,7 @@
 <% if @word %>
 <hr />
 Add translation
-<%= form_for [@word,@word_translate],  :html => { :class => "book" } do |f| %>
+<%= form_for [@word,@word_translate],  :html => { :class => "book" }, remote: true  do |f| %>
 <div class="form-group">
   <%= f.text_field :name, :class => 'form-control kan-ime' %>
 </div>
