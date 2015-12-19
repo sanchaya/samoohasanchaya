@@ -2,23 +2,28 @@
   <% if @word %>
 
   <div class="row">
-
-    <div class="col-md-12"> 
-      <h4> <%= @word.name %></h4>
-      <h5> <%= @word.context %>  </h5>
+    <div class="fuel-logo"> 
+    <%= link_to image_tag('fuel_logo.png',height: '35', width: '150'), 'http://fuelproject.org/' , alt: "Fuel", target: '_blank' %>
+      <hr />
     </div>
-
-    <hr />
     <div class="col-md-12"> 
-
-      <div class="vote_translation"> 
-        <%= render 'fuel_words/vote_translation' %>
+      ಈ ಪದದ ಪರ್ಯಾಯ ಕನ್ನಡ ಪದವನ್ನು ಆರಿಸಿ ಅಥವಾ ಹೊಸ ಪದವನ್ನು ಕೆಳಗೆ ಟೈಪಿಸಿ: 
+      <h4> <b> <%= @word.name %> </b> </h4>
+      <i> ಈ ಪದವನ್ನು ಅನ್ವಯಿಕ ತಂತ್ರಾಂಶಗಳಲ್ಲಿ, ಈ ಸಂದರ್ಭದಲ್ಲಿ ಬಳಸಲಾಗುತ್ತದೆ:
+        <h6> <%= @word.context %>  </h6> </i>
       </div>
-    </div>
-    <div class="col-md-12"> 
-      <%= render 'fuel_words/fuel_form' %>
-    </div>
 
+      <hr />
+      <div class="col-md-12"> 
+
+        <div class="vote_translation"> 
+          <%= render 'fuel_words/vote_translation' %>
+        </div>
+      </div>
+      <div class="col-md-12"> 
+        <%= render 'fuel_words/fuel_form' %>
+      </div>
+
+    </div>
+    <% end %>
   </div>
-  <% end %>
-</div>

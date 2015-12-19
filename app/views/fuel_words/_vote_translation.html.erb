@@ -1,21 +1,21 @@
-<!--  <hr />
-   Vote for translations -->
-   <div> 
-       <table>
-         <% @word_translates.each do |translate| %>
-         <% if translate.name %>
-         <tr>
-            <td><%= translate.name %>
-            </td>
-            <td>
-                <%= link_to vote_translation_fuel_translation_path(translate,fuel_word_id: @word),class: 'vote-link', remote: true do %>
-                <span class="vote <%= user_voted?(current_user, translate.id)%>"> </span>
-                <% end %>
-            </td>
-        </tr>
-        <% end %>
-        <% end %>
-    </table>
+ <hr />
+ <!-- Vote for translations -->
+ <div class="vote-translation"> 
+     <table>
+       <% @word_translates.each do |translate| %>
+       <% if translate.name %>
+       <tr>
+        <td> <span class='voting-word'>  <%= translate.name %> </span>
+        </td>
+        <td>
+            <%= link_to vote_translation_fuel_translation_path(translate,fuel_word_id: @word),class: 'vote-link', remote: true do %>
+            <span class="vote <%= user_voted?(current_user, translate.id)%>"> </span>
+            <% end %>
+        </td>
+    </tr>
+    <% end %>
+    <% end %>
+</table>
 </div>
 
 <%= render 'fuel_words/script_for_ajax' %>

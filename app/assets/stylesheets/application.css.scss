@@ -21,6 +21,20 @@
  	font-family: 'Noto Sans Kannada', serif !important;
  }
 
+.fuel-logo a, fuel-logo a:hover {
+	text-decoration: none;
+	background-color: #fff;
+}
+
+.fuel-logo {
+	margin: 0 5px;
+}
+
+.fuel-logo hr{
+	margin-bottom: 5px;
+    margin-top: 5px;
+}
+
  .circle-div {
  	width:100%;
  }
@@ -129,7 +143,7 @@ We need to fix this later and remove below css
   display: inline-block;
   overflow: hidden;
   width: 40px;
-  height: 15px;
+  height: 20px;
   cursor: pointer;
   background: url('http://i.stack.imgur.com/iqN2k.png');
   background-position: 0 -25px;
@@ -144,3 +158,10 @@ We need to fix this later and remove below css
 	background-color: white;
 }
 
+.voting-word {
+	 font-size: large;
+}
+
+.vote-translation {
+	margin-bottom: 10px;
+}

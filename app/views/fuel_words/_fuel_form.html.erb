@@ -1,13 +1,11 @@
 <% if @word %>
-<hr />
-Add translation
 <%= form_for [@word,@word_translate],  :html => { :class => "book" }, remote: true  do |f| %>
 <div class="form-group">
   <%= f.text_field :name, :class => 'form-control kan-ime' %>
 </div>
 <div class="form-group">
   <%= f.submit t(:translate), class: "btn btn-default"%> 
-  <%= link_to t(:next),root_path,  class: "btn btn-default", remote: true %> 
+  <%= link_to t(:skip),root_path,  class: "btn btn-default", remote: true %> 
 </div>
 <% end %>
 <% else %>
