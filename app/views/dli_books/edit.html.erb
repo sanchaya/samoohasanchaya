@@ -1,3 +1,3 @@
-<%= form_tag [@book],url: dli_books_path , method: :put  do |f| %>
+<%= form_tag [@book],url: dli_books_path , method: :put, class: 'book-info-form'  do |f| %>
   <%= render 'books/others_form' %>
 <% end %>

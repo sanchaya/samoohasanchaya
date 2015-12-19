@@ -25,7 +25,7 @@ class BooksController < ApplicationController
   # GET /books/1/edit
   def edit
     @book = Book.find(params[:id])
-    @traslated = @book.book_translations.last
+    @traslated = @book.book_translations.last ? @book.book_translations.last : @book
     @description = @book.book_description
   end
 

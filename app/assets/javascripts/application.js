@@ -27,20 +27,21 @@ $( document ).ready( function () {
 	// Kannada ime enabled for form 
 	$( '.kan-ime' ).ime();
 
-	// validatin added for book translation form
-	$("#new_fuel_translation").validate({
-		rules:{
+	// // validatin added for book info form
+	// $(".book-info-form").validate({
+	// 	rules:{
 
-			"fuel_translation[name]":
-			{
-				required: true
-			}
-		},
-		messages:{
-			"fuel_translation[name]":
-			{
-				required: "ದಯವಿಟ್ಟು ಪದವನ್ನು ಬೆರಳಚ್ಚು ಮಾಡಿ"
-			}
-		}
+	// 		"others[edition]":
+	// 		{
+	// 			required: true
+	// 		}
+	// 	},
+	// 	messages:{
+	// 		"others[edition]":
+	// 		{
+	// 			required: "ದಯವಿಟ್ಟು ಪದವನ್ನು ಬೆರಳಚ್ಚು ಮಾಡಿ"
+	// 		}
+	// 	}
+	// });
 
-	});
+});
