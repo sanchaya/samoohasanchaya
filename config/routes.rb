@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'dli_books/show'
+
+  get 'dli_books/edit'
+
   get '/categories' => 'categories#index'
   get 'categories/:id' => 'categories#show'
   get 'homes/index'

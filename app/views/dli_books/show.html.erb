@@ -1,0 +1,27 @@
+<div>
+  <table class="table">
+    <tr>
+      <th>
+        Title:
+      </th>
+      <% if @traslated %>
+      <td>
+        <%= @traslated.book_title %>
+      </td>
+      <% end %>
+    </tr>
+    <% if @description and !@description.others.blank? %>
+    <% @description.others.each do |k,v| %>
+    <tr>
+      <th>
+        <%= k %>
+      </th>
+      <td>
+       <%= v %>
+     </td>
+   </tr>
+   <% end %>
+   <% end %>
+ </table>
+ <%= link_to 'Edit', edit_dli_book_path(@book), class: 'btn btn-default' %>
+</div>

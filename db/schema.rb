@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151117180211) do
+ActiveRecord::Schema.define(version: 20151219175640) do
 
   create_table "author_translations", force: true do |t|
     t.integer  "user_id"
@@ -49,6 +49,7 @@ ActiveRecord::Schema.define(version: 20151117180211) do
     t.integer  "book_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "others",           limit: 2147483647
   end
 
   create_table "book_translations", force: true do |t|
@@ -128,6 +129,7 @@ ActiveRecord::Schema.define(version: 20151117180211) do
     t.string   "identifier"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "others",           limit: 2147483647
   end
 
   add_index "dli_book_descriptions", ["book_id"], name: "index_dli_book_descriptions_on_book_id", using: :btree

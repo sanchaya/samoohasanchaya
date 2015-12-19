@@ -12,6 +12,9 @@ class BooksController < ApplicationController
   # GET /books/1
   # GET /books/1.json
   def show
+    @book = Book.find(params[:id])
+    @traslated = @book.book_translations.last 
+    @description = @book.book_description
   end
 
   # GET /books/new
@@ -21,6 +24,9 @@ class BooksController < ApplicationController
 
   # GET /books/1/edit
   def edit
+    @book = Book.find(params[:id])
+    @traslated = @book.book_translations.last
+    @description = @book.book_description
   end
 
   # POST /books
@@ -42,6 +48,10 @@ class BooksController < ApplicationController
   # PATCH/PUT /books/1
   # PATCH/PUT /books/1.json
   def update
+    @book = Book.find(params[:id])
+    @description = @book.book_description
+    @description.update_attribute('others',params[:others])
+    redirect_to book_path(@book)
   end
 
   # DELETE /books/1
