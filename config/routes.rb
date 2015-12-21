@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get '/wiki_books' => 'wiki_books#index'
+
   get 'dli_books/show'
 
   get 'dli_books/edit'

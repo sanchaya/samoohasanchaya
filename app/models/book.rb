@@ -7,53 +7,64 @@ class Book < ActiveRecord::Base
   belongs_to :author
   belongs_to :publisher
 
-  def self.search_books keyword
-    ActiveRecord::Base.connection.execute("
-      select * from master_books
-      where name like '%#{keyword}%'
-      or author like '%#{keyword}%'
-      ")
+
+  def get_full_info
+    { book_name: self.book_translations.first.book_title,
+      author: self.author.author_translations.first.name,
+      publisher: self.publisher.publisher_translations.first.name,
+      library: self.class.to_s == 'Book' ? 'OUDL' : 'DLI',
+      year: self.class.to_s == 'Book' ? self.book_description.date_issued : self.book_description.year ,
+      url: self.book_description.link,
+      categories: self.categories.pluck("kn") }.to_hash
   end
 
+    def self.search_books keyword
+      ActiveRecord::Base.connection.execute("
+        select * from master_books
+        where name like '%#{keyword}%'
+        or author like '%#{keyword}%'
+        ")
+    end
 
 
-  def self.category_books(category)
-    ActiveRecord::Base.connection.execute("
-      select bt.book_title as name,at.name as author,pt.name as publisher, 'osmania' as library,bd.date_issued as year,  bd.link from book_translations bt
-      inner join books b
-      on bt.book_id = b.id
-      inner join authors a
-      on b.author_id = a.id
-      left join author_translations at
-      on at.author_id = a.id
-      inner join book_descriptions bd
-      on b.id = bd.book_id
-      inner join publishers p
-      on p.id = b.publisher_id
-      left join publisher_translations pt
-      on pt.publisher_id = p.id
-      left join book_categories bc
-      on b.id = bc.book_id 
-      where bc.category_id = #{category}
 
-      UNION ALL
-      select dbt.book_title as name,dat.name as author,dpt.name as publisher,'dli' as library,dbd.year as year, dbd.link from dli_book_translations dbt
-      inner join dli_books db
-      on dbt.book_id = db.id
-      inner join dli_authors da
-      on db.author_id = da.id
-      left join dli_author_translations dat
-      on dat.author_id = da.id
-      inner join dli_book_descriptions dbd
-      on db.id = dbd.book_id
-      inner join dli_publishers dp
-      on dp.id = db.publisher_id
-      left join dli_publisher_translations dpt
-      on dpt.publisher_id = dp.id
-      left join dli_book_categories dbc
-      on db.id = dbc.dli_book_id
-      where dbc.category_id = #{category}
-      ")
+    def self.category_books(category)
+      ActiveRecord::Base.connection.execute("
+        select bt.book_title as name,at.name as author,pt.name as publisher, 'osmania' as library,bd.date_issued as year,  bd.link from book_translations bt
+        inner join books b
+        on bt.book_id = b.id
+        inner join authors a
+        on b.author_id = a.id
+        left join author_translations at
+        on at.author_id = a.id
+        inner join book_descriptions bd
+        on b.id = bd.book_id
+        inner join publishers p
+        on p.id = b.publisher_id
+        left join publisher_translations pt
+        on pt.publisher_id = p.id
+        left join book_categories bc
+        on b.id = bc.book_id 
+        where bc.category_id = #{category}
+
+        UNION ALL
+        select dbt.book_title as name,dat.name as author,dpt.name as publisher,'dli' as library,dbd.year as year, dbd.link from dli_book_translations dbt
+        inner join dli_books db
+        on dbt.book_id = db.id
+        inner join dli_authors da
+        on db.author_id = da.id
+        left join dli_author_translations dat
+        on dat.author_id = da.id
+        inner join dli_book_descriptions dbd
+        on db.id = dbd.book_id
+        inner join dli_publishers dp
+        on dp.id = db.publisher_id
+        left join dli_publisher_translations dpt
+        on dpt.publisher_id = dp.id
+        left join dli_book_categories dbc
+        on db.id = dbc.dli_book_id
+        where dbc.category_id = #{category}
+        ")
 end
 
 def self.create_master 

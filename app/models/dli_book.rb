@@ -6,4 +6,16 @@ class DliBook < ActiveRecord::Base
   belongs_to :language
   belongs_to :author, foreign_key: 'author_id', class_name: 'DliAuthor'
   belongs_to :publisher, foreign_key: 'publisher_id', class_name: 'DliPublisher'
-end
+
+  def get_full_info
+    { book_name: self.book_translations.first.book_title,
+      author: self.author.author_translations.first.name,
+      publisher: self.publisher.publisher_translations.first.name,
+      library: self.class.to_s == 'Book' ? 'OUDL' : 'DLI',
+      year: self.class.to_s == 'Book' ? self.book_description.date_issued : self.book_description.year ,
+      url: self.book_description.link,
+      categories: self.categories.pluck("kn") }.to_hash
+  end
+
+
+  end

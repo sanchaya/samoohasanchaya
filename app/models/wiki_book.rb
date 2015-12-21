@@ -1,6 +1,15 @@
 class WikiBook < ActiveRecord::Base
   BASE_URL = 'http://kn.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro=&explaintext=&titles=' 
 
+  def self.book_full_info
+    klass = ['DliBook','Book'].sample
+    book = klass.constantize.order('RAND()').first
+    book.get_full_info
+  rescue 
+    p 'Exception'
+    return false
+  end
+
   def self.wiki_books
     ['DliBook','Book'].each do |book_class|
       books = book_class.constantize.all
