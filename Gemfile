@@ -46,3 +46,4 @@ gem 'will_paginate', '~> 3.0.6'
 gem 'google-analytics-rails'
 gem 'newrelic_rpm'
 gem "font-awesome-rails"
+gem 'httparty'
