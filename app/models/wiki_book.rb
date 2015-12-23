@@ -5,6 +5,7 @@ class WikiBook < ActiveRecord::Base
     klass = ['DliBook','Book'].sample
     book = klass.constantize.order('RAND()').first
     book.get_full_info
+    # Book.first.get_full_info
   rescue 
     p 'Exception'
     return false
