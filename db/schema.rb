@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151221194401) do
+ActiveRecord::Schema.define(version: 20151224132625) do
 
   create_table "author_translations", force: true do |t|
     t.integer  "user_id"
@@ -336,6 +336,16 @@ ActiveRecord::Schema.define(version: 20151221194401) do
     t.string   "library"
     t.integer  "book_id"
     t.boolean  "book_present"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "wiki_users", force: true do |t|
+    t.boolean  "is_account"
+    t.string   "book_name"
+    t.string   "user_name"
+    t.boolean  "was_present"
+    t.boolean  "is_present"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
