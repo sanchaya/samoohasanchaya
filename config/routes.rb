@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'admins/index'
+
   get '/wiki_books' => 'wiki_books#index'
   get '/wiki_user_info' => 'wiki_books#wiki_user_info'
 

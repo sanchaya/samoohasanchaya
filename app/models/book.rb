@@ -123,6 +123,30 @@ def self.create_master
     ")
 
 end
+
+def self.download_book_info
+
+end
+
+def self.to_csv
+  @books = Book.includes(:book_translations).includes(:author).includes(:publisher)
+  @dli_books = DliBook.includes(:book_translations).includes(:author).includes(:publisher)
+  CSV.generate do |csv|
+    csv << ['Book', 'Author', 'Publisher']
+    @books.each do |book|
+      if book.book_translations.first
+        csv << [book.book_translations.first.book_title, book.author.author_translations.first.name, book.publisher.publisher_translations.first.name]
+      end
+    end
+    @dli_books.each do |book|
+      if book.book_translations.first
+        csv << [book.book_translations.first.book_title, book.author.author_translations.first.name, book.publisher.publisher_translations.first.name]
+      end
+    end
+  end
+end
+
+
 end
 
 
