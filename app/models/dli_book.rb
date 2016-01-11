@@ -6,6 +6,7 @@ class DliBook < ActiveRecord::Base
   belongs_to :language
   belongs_to :author, foreign_key: 'author_id', class_name: 'DliAuthor'
   belongs_to :publisher, foreign_key: 'publisher_id', class_name: 'DliPublisher'
+  has_many :wiki_books,  foreign_key: 'book_id', class_name: 'WikiBook'
 
   def get_full_info
     { book_name: translated_book_name,
@@ -17,22 +18,25 @@ class DliBook < ActiveRecord::Base
       categories: self.categories.pluck("kn") ,
       is_present_in_wiki: book_in_wiki?
       }.to_hash
-  end
+    end
 
-  def translated_book_name
-    self.book_translations.first.book_title
-  end
+    def translated_book_name
+      self.book_translations.first.book_title
+    end
 
-  def translated_author_name
-    self.author.author_translations.first.name
-  end
+    def translated_author_name
+      self.author.author_translations.first.name
+    end
 
-  def translated_publisher_name
-    self.publisher.publisher_translations.first.name
-  end
+    def translated_publisher_name
+      self.publisher.publisher_translations.first.name
+    end
 
-  def book_in_wiki?
-    WikiBook.check_book_in_wiki(translated_book_name)
-  end
+    def book_in_wiki?
+      WikiBook.check_book_in_wiki(translated_book_name)
+    end
 
+    def wiki_book_present?
+      self.wiki_books.where(library: 'Dli').first.nil? ? false : self.wiki_books.where(library: 'Dli').first.book_present
+    end
   end

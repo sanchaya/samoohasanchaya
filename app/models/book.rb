@@ -6,6 +6,7 @@ class Book < ActiveRecord::Base
   belongs_to :language
   belongs_to :author
   belongs_to :publisher
+  has_many :wiki_books,  foreign_key: 'book_id', class_name: 'WikiBook'
 
 
   def get_full_info
@@ -132,20 +133,23 @@ def self.to_csv
   @books = Book.includes(:book_translations).includes(:author).includes(:publisher)
   @dli_books = DliBook.includes(:book_translations).includes(:author).includes(:publisher)
   CSV.generate do |csv|
-    csv << ['Book', 'Author', 'Publisher']
+    csv << ['Book', 'Author','Rights' ,'Wiki article', 'Year', 'Publisher']
     @books.each do |book|
       if book.book_translations.first
-        csv << [book.book_translations.first.book_title, book.author.author_translations.first.name, book.publisher.publisher_translations.first.name]
+        csv << [book.book_translations.first.book_title, book.author.author_translations.first.name,book.book_description.rights,book.wiki_book_present?,book.book_description.date_issued,book.publisher.publisher_translations.first.name]
       end
     end
     @dli_books.each do |book|
       if book.book_translations.first
-        csv << [book.book_translations.first.book_title, book.author.author_translations.first.name, book.publisher.publisher_translations.first.name]
+        csv << [book.book_translations.first.book_title, book.author.author_translations.first.name,book.book_description.copyright,book.wiki_book_present?,book.book_description.year,book.publisher.publisher_translations.first.name]
       end
     end
   end
 end
 
+def wiki_book_present?
+  self.wiki_books.where(library: 'Osmania').first.nil? ? false : self.wiki_books.where(library: 'Osmania').first.book_present
+end
 
 end
 
