@@ -1,39 +1,64 @@
+<!-- Book fields  -->
 <div class="form-group">
   <label class="control-label">Book</label>
-  <%= text_field_tag :book_title, @traslated.book_title, :class => 'form-control kan-ime' %>
+  <%= text_field_tag 'book', @traslated.book_title, :class => 'form-control kan-ime' %>
 </div>
+
+<!-- Author fields -->
+
+<div class="form-group">
+  <label class="control-label">Author</label>
+  <%= text_field_tag 'author',@book.author.author_translations.first.name, :class => 'form-control kan-ime' %>
+</div>
+
+<!-- Publisher fields  -->
+<div class="form-group">
+  <label class="control-label">Publisher</label>
+  <%= text_field_tag 'publisher',@book.publisher.publisher_translations.first.name, :class => 'form-control kan-ime' %>
+</div>
+<!-- Description fields -->
+<div class="form-group">
+  <label class="control-label">Year</label>
+  <%= text_field_tag "year", @book.class.to_s == 'Book' ?  @description.date_issued  : @description.year, :class => 'form-control' %>
+</div>
+
+<div class="form-group">
+  <label class="control-label">Right</label>
+  <%= text_field_tag "rights",@description.rights, :class => 'form-control kan-ime' %>
+</div>
+
 <div class="form-group">
   <label class="control-label">Edition</label>
-  <%= text_field_tag "others[edition]", "", :class => 'form-control kan-ime' %>
+  <%= text_field_tag "others[edition]", @description.others['edition'], :class => 'form-control kan-ime' %>
 </div>
 <div class="form-group">
   <label class="control-label">Print Type (Hard bound/paper back)  </label>
-  <%= text_field_tag "others[print_type]", "", :class => 'form-control kan-ime' %>
+  <%= text_field_tag "others[print_type]", @description.others['print_type'], :class => 'form-control kan-ime' %>
 </div>
 <div class="form-group">
   <label class="control-label">Price</label>
-  <%= text_field_tag "others[price]", "", :class => 'form-control kan-ime' %>
+  <%= text_field_tag "others[price]", @description.others['price'], :class => 'form-control kan-ime' %>
 </div>
 <div class="form-group">
   <label class="control-label">Printer</label>
-  <%= text_field_tag "others[printer]", "", :class => 'form-control kan-ime' %>
+  <%= text_field_tag "others[printer]", @description.others['printer'], :class => 'form-control kan-ime' %>
 </div>
 <div class="form-group">
   <label class="control-label">Cover Page Design</label>
-  <%= text_field_tag "others[cover_page_design]", "", :class => 'form-control kan-ime' %>
+  <%= text_field_tag "others[cover_page_design]", @description.others['cover_page_design'], :class => 'form-control kan-ime' %>
 </div>
 <div class="form-group">
   <label class="control-label">Forward by</label>
-  <%= text_field_tag "others[forward_by]", "", :class => 'form-control kan-ime' %>
+  <%= text_field_tag "others[forward_by]", @description.others['forward_by'], :class => 'form-control kan-ime' %>
 </div>
 <div class="form-group">
   <label class="control-label">Last word by</label>
-  <%= text_field_tag "others[last_word_by]", "", :class => 'form-control kan-ime' %>
+  <%= text_field_tag "others[last_word_by]", @description.others['last_word_by'], :class => 'form-control kan-ime' %>
 </div>
 <div class="form-group">
   <label class="control-label">External References</label>
-  <%= text_area_tag "others[external_reference]", "", :class => 'form-control kan-ime' %>
+  <%= text_area_tag "others[external_reference]", @description.others['external_reference'], :class => 'form-control kan-ime' %>
 </div>
 <div class="form-group">
-  <%= submit_tag t(:translate), class: "btn btn-default"%> 
+  <%= submit_tag 'Update', class: "btn btn-default"%> 
 </div>

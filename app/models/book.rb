@@ -141,7 +141,7 @@ def self.to_csv
     end
     @dli_books.each do |book|
       if book.book_translations.first
-        csv << [book.book_translations.first.book_title, book.author.author_translations.first.name,book.book_description.copyright,book.wiki_book_present?,book.book_description.year,book.publisher.publisher_translations.first.name]
+        csv << [book.book_translations.first.book_title, book.author.author_translations.first.name,book.book_description.rights,book.wiki_book_present?,book.book_description.year,book.publisher.publisher_translations.first.name]
       end
     end
   end

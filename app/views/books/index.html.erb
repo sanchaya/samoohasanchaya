@@ -1,0 +1,26 @@
+<table class="table">
+  <tr>
+    <th>
+      Book
+    </th>
+    <th>
+      Author
+    </th>
+    <th>
+      Pubisher
+    </th>
+    <th>
+      Actions
+    </th>
+  </tr>
+  <% @list_books.each do |book| %>
+  <tr>
+    <td> <%= book.book_translations.first.book_title %></td>
+    <td> <%= book.author.author_translations.first.name %></td>
+    <td> <%= book.publisher.publisher_translations.first.name %></td>
+    <td> <%= link_to 'Edit', book.class.to_s == 'Book' ?  edit_book_path(book) : edit_dli_book_path(book), class: 'btn btn-default' %> </td>
+  </tr>
+  <% end %>
+</table>
+
+<%= will_paginate @list_books %>
