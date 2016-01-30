@@ -4,7 +4,9 @@ class BooksController < ApplicationController
   # GET /books
   # GET /books.json
   def index
-    @list_books = Book.includes(:book_description).includes(:author).includes(:publisher).includes(:book_translations).paginate(:page => params[:page])
+    reviewed =  BookReview.pluck('book_id') 
+    list_books = Book.includes(:book_description).includes(:author).includes(:publisher).includes(:book_translations).where("id not in (?)",reviewed.blank? ? [0] : reviewed)
+    @list_books = list_books.paginate(:page => params[:page])
     translated = BookTranslation.pluck('book_id')
     untranslated_books = Book.where("id not in (?)", translated.blank? ? [0] : translated )
     @books = untranslated_books.paginate(:page => params[:page])
@@ -53,6 +55,7 @@ class BooksController < ApplicationController
     @book.book_translations.first.update_attribute('book_title',params[:book])
     @book.author.author_translations.first.update_attribute('name',params[:author])
     @book.publisher.publisher_translations.first.update_attribute('name',params[:publisher])
+    BookReview.create(book_id: @book.id)
     @description = @book.book_description
     @description.update_attributes(others: params[:others], date_issued: params[:year], rights: params[:rights])
     redirect_to book_path(@book)
