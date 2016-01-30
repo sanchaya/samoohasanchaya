@@ -2,7 +2,8 @@ class DliBooksController < ApplicationController
 
   def index
     reviewed =  DliBookReview.pluck('dli_book_id')
-    list_books = DliBook.includes(:book_description).includes(:author).includes(:publisher).includes(:book_translations).where("id not in (?)",reviewed.blank? ? [0] : reviewed)
+    search_ids = DliBookTranslation.where("book_title like '%#{params[:search]}' ").pluck('book_id')
+    list_books = DliBook.includes(:book_description).includes(:author).includes(:publisher).includes(:book_translations).where("id not in (?) and id in (?)",reviewed.blank? ? [0] : reviewed, search_ids)
     @list_books = list_books.paginate(:page => params[:page])
     render 'books/index'
   end

@@ -5,7 +5,8 @@ class BooksController < ApplicationController
   # GET /books.json
   def index
     reviewed =  BookReview.pluck('book_id') 
-    list_books = Book.includes(:book_description).includes(:author).includes(:publisher).includes(:book_translations).where("id not in (?)",reviewed.blank? ? [0] : reviewed)
+    search_ids = BookTranslation.where("book_title like '%#{params[:search]}' ").pluck('book_id')
+    list_books = Book.includes(:book_description).includes(:author).includes(:publisher).includes(:book_translations).where("id not in (?) and id in (?)",reviewed.blank? ? [0] : reviewed, search_ids)
     @list_books = list_books.paginate(:page => params[:page])
     translated = BookTranslation.pluck('book_id')
     untranslated_books = Book.where("id not in (?)", translated.blank? ? [0] : translated )
