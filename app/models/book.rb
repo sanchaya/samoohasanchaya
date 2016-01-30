@@ -7,6 +7,7 @@ class Book < ActiveRecord::Base
   belongs_to :author
   belongs_to :publisher
   has_many :wiki_books,  foreign_key: 'book_id', class_name: 'WikiBook'
+  has_one :book_review, dependent: :destroy #Temporary till gets reviewed then we can remove this
 
 
   def get_full_info
