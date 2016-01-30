@@ -1,4 +1,5 @@
 class DliBooksController < ApplicationController
+  before_action :authenticate_user!, only: [:index, :edit, :update]
 
   def index
     reviewed =  DliBookReview.pluck('dli_book_id')
