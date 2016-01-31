@@ -10,7 +10,8 @@ class DliBook < ActiveRecord::Base
   has_one :book_review, dependent: :destroy, foreign_key: 'dli_book_id', class_name: 'DliBookReview' #Temporary till gets reviewed then we can remove this
 
   def get_full_info
-    { book_name: translated_book_name,
+    { book_id: self.id,
+      book_name: translated_book_name,
       author: translated_author_name,
       publisher: translated_publisher_name,
       library: self.class.to_s == 'Book' ? 'OUDL' : 'DLI',
@@ -40,4 +41,8 @@ class DliBook < ActiveRecord::Base
     def wiki_book_present?
       self.wiki_books.where(library: 'Dli').first.nil? ? false : self.wiki_books.where(library: 'Dli').first.book_present
     end
-  end
+
+    def self.present_wiki_books
+      WikiUser.where(is_present: true, library: 'Dli')
+    end
+end

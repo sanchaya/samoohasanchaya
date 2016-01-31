@@ -11,8 +11,11 @@ class WikiBooksController < ApplicationController
   def wiki_user_info
     book_name = params['book_name']
     user_name = params['user_name']
+    is_account = params['is_account']
+    book_id  = params['book_id']
+    library = params['library']
     respond_to do |format|
-      if WikiUser.create(book_name: book_name, is_account: false, user_name: user_name)
+      if WikiUser.capture_wiki_user(book_name,is_account,user_name,book_id,library)
         format.json { head :ok }
       else
        format.json { head :error }

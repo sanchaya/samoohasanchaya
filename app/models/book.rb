@@ -11,7 +11,8 @@ class Book < ActiveRecord::Base
 
 
   def get_full_info
-    { book_name: translated_book_name,
+    { book_id: self.id,
+      book_name: translated_book_name,
       author: translated_author_name,
       publisher: translated_publisher_name,
       library: self.class.to_s == 'Book' ? 'OUDL' : 'DLI',
@@ -150,6 +151,10 @@ end
 
 def wiki_book_present?
   self.wiki_books.where(library: 'Osmania').first.nil? ? false : self.wiki_books.where(library: 'Osmania').first.book_present
+end
+
+def self.present_wiki_books
+  WikiUser.where(is_present: true, library: 'Osmania')
 end
 
 end

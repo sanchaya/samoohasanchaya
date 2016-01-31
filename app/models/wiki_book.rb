@@ -3,7 +3,8 @@ class WikiBook < ActiveRecord::Base
 
   def self.book_full_info
     klass = ['DliBook','Book'].sample
-    book = klass.constantize.order('RAND()').first
+    present_in_wiki = klass.constantize.present_wiki_books.pluck('book_id')
+    book = klass.constantize.where("id not in (?)", present_in_wiki.blank? ? [0] : present_in_wiki).order('RAND()').first
     book.get_full_info
     # Book.first.get_full_info
   rescue 
@@ -20,6 +21,14 @@ class WikiBook < ActiveRecord::Base
         create_wiki_book(book,wiki_book_present)
       end
     end
+  end
+
+  def self.osmania_wiki_books
+    WikiBook.where(library: 'Osmania')
+  end
+
+  def self.dli_wiki_books
+    WikiBook.where(library: 'Dli')
   end
 
   def self.create_wiki_book(book,wiki_book_present=false)
