@@ -4,6 +4,11 @@
   <%= text_field_tag 'book', @traslated.book_title, :class => 'form-control kan-ime' %>
 </div>
 
+<div class="form-group">
+  <label class="control-label"> Barcode/Filename </label>
+  <%= label_tag 'bar_code', @book.class.to_s == 'Book' ?   @description.file_name : @description.barcode, :class => 'form-control kan-ime' %>
+</div>
+
 <!-- Author fields -->
 
 <div class="form-group">
