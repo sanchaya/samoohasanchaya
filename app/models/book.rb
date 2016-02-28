@@ -157,6 +157,10 @@ def self.present_wiki_books
   WikiUser.where(is_present: true, library: 'Osmania')
 end
 
+def self.non_copyright_books
+  Book.joins(:book_description).where("rights = 'OUT_OF_COPYRIGHT'")
+end
+
 end
 
 
