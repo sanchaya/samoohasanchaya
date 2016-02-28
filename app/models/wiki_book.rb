@@ -41,10 +41,15 @@ class WikiBook < ActiveRecord::Base
   end
 
   def self.check_book_in_wiki(book='')
+    book = append_pustaka(book) #append (ಪುಸ್ತಕ) to search article with books
     full_url = "#{BASE_URL}#{book}"
     parsed_hash = httparty_parse(full_url)
     page_ids = page_ids_in_hash(parsed_hash)
     return  valid_page_id_present?(page_ids)
+  end
+
+  def self.append_pustaka(book='')
+    book.to_s + '(ಪುಸ್ತಕ)' unless book.include?('(ಪುಸ್ತಕ)')
   end
 
   def self.valid_page_id_present?(page_ids)
