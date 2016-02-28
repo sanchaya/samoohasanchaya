@@ -5,12 +5,15 @@ class BooksController < ApplicationController
   # GET /books.json
   def index
     reviewed =  BookReview.pluck('book_id') 
-    search_ids = BookTranslation.where("book_title like '%#{params[:search]}' ").pluck('book_id')
+    search_ids = BookTranslation.where("book_title like '%#{params[:search]}%' ").pluck('book_id') #gives all result if search param is blank
+    non_copyright_books = Book.non_copyright_books.pluck('id')
+    # inside bracket gives ids except non_copyright_books ie copyrighted, again search_ids takesout copyrighted, result will be only non copyright
+    search_ids = search_ids - (search_ids - non_copyright_books) #For now we need only copyrighted books later remove this and abobe lines 
     list_books = Book.includes(:book_description).includes(:author).includes(:publisher).includes(:book_translations).where("id not in (?) and id in (?)",reviewed.blank? ? [0] : reviewed, search_ids)
     @list_books = list_books.paginate(:page => params[:page])
-    translated = BookTranslation.pluck('book_id')
-    untranslated_books = Book.where("id not in (?)", translated.blank? ? [0] : translated )
-    @books = untranslated_books.paginate(:page => params[:page])
+    # translated = BookTranslation.pluck('book_id')
+    # untranslated_books = Book.where("id not in (?)", translated.blank? ? [0] : translated )
+    # @books = untranslated_books.paginate(:page => params[:page])
   end
 
   # GET /books/1
