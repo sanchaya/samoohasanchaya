@@ -4,9 +4,11 @@ class WikiBook < ActiveRecord::Base
   def self.book_full_info
     klass = ['DliBook','Book'].sample
     present_in_wiki = klass.constantize.present_wiki_books.pluck('book_id')
-    book = klass.constantize.where("id not in (?)", present_in_wiki.blank? ? [0] : present_in_wiki).order('RAND()').first
+    non_copyright_books = klass.constantize.non_copyright_books.pluck('id') #To get only out of copyright books
+    # To remove only out of copyright filter remove above and below line And uncomment other commented line
+    book = klass.constantize.where("id not in (?) and id in (?)", present_in_wiki.blank? ? [0] : present_in_wiki,non_copyright_books).order('RAND()').first
+    # book = klass.constantize.where("id not in (?)", present_in_wiki.blank? ? [0] : present_in_wiki).order('RAND()').first
     book.get_full_info
-    # Book.first.get_full_info
   rescue 
     p 'Exception'
     return false
