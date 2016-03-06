@@ -5,9 +5,12 @@ class WikiBook < ActiveRecord::Base
     klass = ['DliBook','Book'].sample
     klass = ['Book'].sample
     present_in_wiki = klass.constantize.present_wiki_books.pluck('book_id')
-    non_copyright_books = klass.constantize.non_copyright_books.pluck('id') #To get only out of copyright books
+    # non_copyright_books = klass.constantize.non_copyright_books.pluck('id') #To get only out of copyright books
+    reviewed =  only_reviwed_books(klass) #only reviewed books
+    # reviewed_non_copyright_books = (non_copyright_books + reviewed).flatten #To get only out of copyright and reviewed books
+    # Clean code Or make it dynamic, as any conditions can be added.
     # To remove only out of copyright filter remove above and below line And uncomment other commented line
-    book = klass.constantize.where("id not in (?) and id in (?)", present_in_wiki.blank? ? [0] : present_in_wiki,non_copyright_books).order('RAND()').first
+    book = klass.constantize.where("id not in (?) and id in (?)", present_in_wiki.blank? ? [0] : present_in_wiki,reviewed).order('RAND()').first
     # book = klass.constantize.where("id not in (?)", present_in_wiki.blank? ? [0] : present_in_wiki).order('RAND()').first
     book.get_full_info
   rescue 
@@ -24,6 +27,10 @@ class WikiBook < ActiveRecord::Base
         create_wiki_book(book,wiki_book_present)
       end
     end
+  end
+
+  def self.only_reviwed_books(klass_name)
+    klass_name == "Book" ? BookReview.pluck('book_id')  :  DliBookReview.pluck('dli_book_id')
   end
 
   def self.osmania_wiki_books
