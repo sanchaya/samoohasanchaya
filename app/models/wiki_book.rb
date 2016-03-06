@@ -3,6 +3,7 @@ class WikiBook < ActiveRecord::Base
 
   def self.book_full_info
     klass = ['DliBook','Book'].sample
+    klass = ['Book'].sample
     present_in_wiki = klass.constantize.present_wiki_books.pluck('book_id')
     non_copyright_books = klass.constantize.non_copyright_books.pluck('id') #To get only out of copyright books
     # To remove only out of copyright filter remove above and below line And uncomment other commented line
