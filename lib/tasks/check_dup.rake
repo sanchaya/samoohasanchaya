@@ -53,6 +53,20 @@ task :check_dup_books_from_csv => :environment do
 end
 
 
+desc "Update DLI updated link based on BarCode"
+task :update_dli_link_from_csv => :environment do
+  puts 'started'
+  file_name = Rails.root.to_s + '/lib/new_dli_url.csv' 
+  CSV.foreach(file_name, :col_sep => ',', :headers => true) do |row|
+    puts ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
+    dli = DliBookDescription.find_by_barcode(row['barcode'])
+    puts row['barcode']
+    puts  row['url']
+    dli.update_attribute('link', row['url']) if dli && row['url'] && !row['url'].blank?
+  end
+end
+
+
 
 class CreateDli
 

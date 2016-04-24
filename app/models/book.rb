@@ -89,9 +89,9 @@ class Book < ActiveRecord::Base
 end
 
 def self.create_master 
-  # ActiveRecord::Base.connection.execute("
-  #   drop VIEW master_books
-  #   ")
+  ActiveRecord::Base.connection.execute("
+    drop VIEW master_books
+    ")
    # BookTranslation.joins(:book, :book_description).select("book_translations.book_title AS book_title, books.id AS book_id, book_descriptions.link AS link").where("book_translations.book_title like ?", "%#{keyword}%")
    ActiveRecord::Base.connection.execute("
     CREATE VIEW master_books AS
