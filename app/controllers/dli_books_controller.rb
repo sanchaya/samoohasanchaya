@@ -25,8 +25,8 @@ class DliBooksController < ApplicationController
   def update
     find_book
     @book.book_translations.first.update_attribute('book_title',params[:book])
-    @book.author.author_translations.first.update_attribute('name',params[:author])
-    @book.publisher.publisher_translations.first.update_attribute('name',params[:publisher])
+    # @book.author.author_translations.first.update_attribute('name',params[:author])
+    # @book.publisher.publisher_translations.first.update_attribute('name',params[:publisher])
     DliBookReview.create(dli_book_id: @book.id)
     @description.update_attributes(others: params[:others], year: params[:year], rights: params[:rights])
     redirect_to dli_book_path(@book)

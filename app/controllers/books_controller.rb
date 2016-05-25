@@ -57,8 +57,8 @@ class BooksController < ApplicationController
   def update
     @book = Book.find(params[:id])
     @book.book_translations.first.update_attribute('book_title',params[:book])
-    @book.author.author_translations.first.update_attribute('name',params[:author])
-    @book.publisher.publisher_translations.first.update_attribute('name',params[:publisher])
+    # @book.author.author_translations.first.update_attribute('name',params[:author])
+    # @book.publisher.publisher_translations.first.update_attribute('name',params[:publisher])
     BookReview.create(book_id: @book.id)
     @description = @book.book_description
     @description.update_attributes(others: params[:others], date_issued: params[:year], rights: params[:rights])

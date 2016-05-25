@@ -115,3 +115,44 @@ task :assign_association2 => :environment do
     DliBookCategory.create(dli_book_id: book.book_id, category_id: cat.id)  
   end
 end
+
+
+desc "Merge everything to kannada_books"
+task :merge_all_books => :environment do
+
+   # ActiveRecord::Base.connection.execute("Drop  TABLE `kannada_books`")
+
+   ActiveRecord::Base.connection.execute("CREATE  TABLE `kannada_books` (
+  `id` INT  NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(255) NULL ,
+  `author` VARCHAR(255) NULL ,
+  `publisher` VARCHAR(255) NULL ,
+  `library` VARCHAR(255) NULL ,
+  `book_link` VARCHAR(255) NULL ,
+  PRIMARY KEY (`id`) ,
+  UNIQUE INDEX `id_UNIQUE` (`id` ASC) )
+  ENGINE = InnoDB;")
+
+  Book.all.each do |book|
+    name = book.book_translations.first.book_title
+    author = book.author.author_translations.first.name
+    publisher = book.publisher.publisher_translations.first.name
+    library = 'Osmania'
+    link = book.book_description.link
+    ActiveRecord::Base.connection.execute("INSERT INTO `kannada_books` (`name`, `author`, `publisher`, `library`, `book_link`) VALUES ('#{name.gsub("'","")}', '#{author}', '#{publisher}', '#{library}', '#{link}');
+")
+    puts ">>>>>>>> Osmania #{book.id} <<<<<<<<<<<<<<<<<<<<"
+  end
+
+  DliBook.all.each do |book|
+    name = book.book_translations.first.book_title
+    author = book.author.author_translations.first.name
+    publisher = book.publisher.publisher_translations.first.name
+    library = 'Dli'
+    link = book.book_description.link
+    ActiveRecord::Base.connection.execute("INSERT INTO `kannada_books` (`name`, `author`, `publisher`, `library`, `book_link`) VALUES ('#{name.gsub("'","")}', '#{author}', '#{publisher}', '#{library}', '#{link}');
+")
+    puts ">>>>>>>> Dli #{book.id} <<<<<<<<<<<<<<<<<<<<"
+  end
+ end
+
