@@ -150,7 +150,7 @@ task :merge_all_books => :environment do
     publisher = book.publisher.publisher_translations.first.name
     library = 'Dli'
     link = book.book_description.link
-    ActiveRecord::Base.connection.execute("INSERT INTO `kannada_books` (`name`, `author`, `publisher`, `library`, `book_link`) VALUES ('#{name.gsub("'","")}', '#{author}', '#{publisher}', '#{library}', '#{link}');
+    ActiveRecord::Base.connection.execute("INSERT INTO `kannada_books` (`name`, `author`, `publisher`, `library`, `book_link`) VALUES ('#{name.gsub("'","")}', '#{author}', '#{publisher.gsub("'","")}', '#{library}', '#{link}');
 ")
     puts ">>>>>>>> Dli #{book.id} <<<<<<<<<<<<<<<<<<<<"
   end
