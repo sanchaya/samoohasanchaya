@@ -120,7 +120,7 @@ end
 desc "Merge everything to kannada_books"
 task :merge_all_books => :environment do
 
-   # ActiveRecord::Base.connection.execute("Drop  TABLE `kannada_books`")
+   ActiveRecord::Base.connection.execute("Drop  TABLE `kannada_books`")
 
    ActiveRecord::Base.connection.execute("CREATE  TABLE `kannada_books` (
   `id` INT  NOT NULL AUTO_INCREMENT,
@@ -129,6 +129,8 @@ task :merge_all_books => :environment do
   `publisher` VARCHAR(255) NULL ,
   `library` VARCHAR(255) NULL ,
   `book_link` VARCHAR(255) NULL ,
+  `created_at` DATETIME ,
+  `updated_at` DATETIME ,
   PRIMARY KEY (`id`) ,
   UNIQUE INDEX `id_UNIQUE` (`id` ASC) )
   ENGINE = InnoDB;")

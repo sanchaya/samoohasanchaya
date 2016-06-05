@@ -1,0 +1,84 @@
+<%= form_for @kannada_book, :html => { :class => "form-horizontal kannada_book" } do |f| %>
+
+    <% if @kannada_book.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@kannada_book.errors.count, "error") %> prohibited this kannada_book from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @kannada_book.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="control-group">
+    <%= f.label :name, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :name, :class => 'form-control' %>
+    </div>
+    <%= error_span(@kannada_book[:name]) %>
+  </div>
+  <div class="control-group">
+    <%= f.label :author, :class => 'control-label' %>
+    <div class="controls" id="the-basics">
+      <%= f.text_field :author, :class => 'form-control typeahead' %>
+    </div>
+    <%= error_span(@kannada_book[:author]) %>
+  </div>
+  <div class="control-group">
+    <%= f.label :publisher, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :publisher, :class => 'form-control' %>
+    </div>
+    <%= error_span(@kannada_book[:publisher]) %>
+  </div>
+
+
+
+
+  <%= f.submit nil, :class => 'btn btn-primary' %>
+  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+            kannada_books_path, :class => 'btn btn-default' %>
+
+<% end %>
+
+
+<script type="text/javascript">
+  var substringMatcher = function(strs) {
+  return function findMatches(q, cb) {
+    var matches, substringRegex;
+
+    // an array that will be populated with substring matches
+    matches = [];
+
+    // regex used to determine if a string contains the substring `q`
+    substrRegex = new RegExp(q, 'i');
+
+    // iterate through the pool of strings and for any string that
+    // contains the substring `q`, add it to the `matches` array
+    $.each(strs, function(i, str) {
+      if (substrRegex.test(str)) {
+        matches.push(str);
+      }
+    });
+
+    cb(matches);
+  };
+};
+
+var states = <%= raw AuthorTranslation.uniq.pluck('name') %>;
+
+$('#the-basics .typeahead').typeahead({
+  hint: true,
+  highlight: true,
+  minLength: 1
+},
+{
+  name: 'states',
+  source: substringMatcher(states)
+});
+</script>

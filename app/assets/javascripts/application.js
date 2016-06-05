@@ -20,6 +20,8 @@
 //= require jquery.ime.selector
 //= require jquery.ime.preferences
 //= require jquery.ime.inputmethods
+//= require twitter/typeahead
+//= require twitter/typeahead.min
 //= require_tree .
 
 

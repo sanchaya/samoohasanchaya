@@ -1,0 +1,30 @@
+<%- model_class = KannadaBook -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:name) %></th>
+      <th><%= model_class.human_attribute_name(:author) %></th>
+      <th><%= model_class.human_attribute_name(:publisher) %></th>
+      <th><%= model_class.human_attribute_name(:library) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @kannada_books.each do |kannada_book| %>
+      <tr>
+        <td><%= link_to kannada_book.name, kannada_book_path(kannada_book) %></td>
+        <td><%= kannada_book.author %></td>
+        <td><%= kannada_book.publisher %></td>
+        <td><%= kannada_book.library %></td>
+        <td>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_kannada_book_path(kannada_book), :class => 'btn btn-default btn-xs' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+

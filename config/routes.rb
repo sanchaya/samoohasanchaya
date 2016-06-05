@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :kannada_books
+
   get '/admins' => 'admins#index'
   get 'admins/download_book_info'
    get 'admins/download_categories'

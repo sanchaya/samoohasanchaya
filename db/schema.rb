@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160131184316) do
+ActiveRecord::Schema.define(version: 20160605181247) do
 
   create_table "author_translations", force: true do |t|
     t.integer  "user_id"
@@ -205,6 +205,16 @@ ActiveRecord::Schema.define(version: 20160131184316) do
   end
 
   add_index "fuel_words", ["name"], name: "index_fuel_words_on_name", using: :btree
+
+  create_table "kannada_books", force: true do |t|
+    t.string "name"
+    t.string "author"
+    t.string "publisher"
+    t.string "library"
+    t.string "book_link"
+  end
+
+  add_index "kannada_books", ["id"], name: "id_UNIQUE", unique: true, using: :btree
 
   create_table "languages", force: true do |t|
     t.string   "name"

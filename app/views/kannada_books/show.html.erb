@@ -1,0 +1,22 @@
+<%- model_class = KannadaBook -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:name) %>:</strong></dt>
+  <dd><%= @kannada_book.name %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:author) %>:</strong></dt>
+  <dd><%= @kannada_book.author %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:publisher) %>:</strong></dt>
+  <dd><%= @kannada_book.publisher %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:library) %>:</strong></dt>
+  <dd><%= @kannada_book.library %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:book_link) %>:</strong></dt>
+  <dd><%= @kannada_book.book_link %></dd>
+</dl>
+
+<%= link_to t('.back', :default => t("helpers.links.back")),
+              kannada_books_path, :class => 'btn btn-default'  %>
+<%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_kannada_book_path(@kannada_book), :class => 'btn btn-default' %>

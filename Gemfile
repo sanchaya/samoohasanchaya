@@ -47,3 +47,4 @@ gem 'google-analytics-rails'
 gem 'newrelic_rpm'
 gem "font-awesome-rails"
 gem 'httparty'
+gem 'twitter-typeahead-rails'
