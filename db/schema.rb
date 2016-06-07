@@ -213,6 +213,7 @@ ActiveRecord::Schema.define(version: 20160605181247) do
     t.string   "library"
     t.string   "book_link"
     t.integer  "book_id"
+    t.string   "barcode"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
