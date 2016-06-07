@@ -44,6 +44,6 @@ class KannadaBooksController < ApplicationController
     end
 
     def kannada_book_params
-      params.require(:kannada_book).permit(:name, :author, :publisher, :library, :book_link)
+      params.require(:kannada_book).permit(:name, :author, :publisher)
     end
 end
