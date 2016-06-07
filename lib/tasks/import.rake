@@ -120,20 +120,20 @@ end
 desc "Merge everything to kannada_books"
 task :merge_all_books => :environment do
 
-   ActiveRecord::Base.connection.execute("Drop  TABLE `kannada_books`")
+  #  ActiveRecord::Base.connection.execute("Drop  TABLE `kannada_books`")
 
-   ActiveRecord::Base.connection.execute("CREATE  TABLE `kannada_books` (
-  `id` INT  NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(255) NULL ,
-  `author` VARCHAR(255) NULL ,
-  `publisher` VARCHAR(255) NULL ,
-  `library` VARCHAR(255) NULL ,
-  `book_link` VARCHAR(255) NULL ,
-  `created_at` DATETIME ,
-  `updated_at` DATETIME ,
-  PRIMARY KEY (`id`) ,
-  UNIQUE INDEX `id_UNIQUE` (`id` ASC) )
-  ENGINE = InnoDB;")
+  #  ActiveRecord::Base.connection.execute("CREATE  TABLE `kannada_books` (
+  # `id` INT  NOT NULL AUTO_INCREMENT,
+  # `name` VARCHAR(255) NULL ,
+  # `author` VARCHAR(255) NULL ,
+  # `publisher` VARCHAR(255) NULL ,
+  # `library` VARCHAR(255) NULL ,
+  # `book_link` VARCHAR(255) NULL ,
+  # `created_at` DATETIME ,
+  # `updated_at` DATETIME ,
+  # PRIMARY KEY (`id`) ,
+  # UNIQUE INDEX `id_UNIQUE` (`id` ASC) )
+  # ENGINE = InnoDB;")
 
   Book.all.each do |book|
     name = book.book_translations.first.book_title
@@ -141,7 +141,7 @@ task :merge_all_books => :environment do
     publisher = book.publisher.publisher_translations.first.name
     library = 'Osmania'
     link = book.book_description.link
-    ActiveRecord::Base.connection.execute("INSERT INTO `kannada_books` (`name`, `author`, `publisher`, `library`, `book_link`) VALUES ('#{name.gsub("'","")}', '#{author}', '#{publisher}', '#{library}', '#{link}');
+    ActiveRecord::Base.connection.execute("INSERT INTO `kannada_books` (`name`, `author`, `publisher`, `library`, `book_link`, `book_id`) VALUES ('#{name.gsub("'","")}', '#{author}', '#{publisher}', '#{library}', '#{link}', '#{book.id}');
 ")
     puts ">>>>>>>> Osmania #{book.id} <<<<<<<<<<<<<<<<<<<<"
   end
@@ -152,7 +152,7 @@ task :merge_all_books => :environment do
     publisher = book.publisher.publisher_translations.first.name
     library = 'Dli'
     link = book.book_description.link
-    ActiveRecord::Base.connection.execute("INSERT INTO `kannada_books` (`name`, `author`, `publisher`, `library`, `book_link`) VALUES ('#{name.gsub("'","")}', '#{author}', '#{publisher.gsub("'","")}', '#{library}', '#{link}');
+    ActiveRecord::Base.connection.execute("INSERT INTO `kannada_books` (`name`, `author`, `publisher`, `library`, `book_link`, `book_id`) VALUES ('#{name.gsub("'","")}', '#{author}', '#{publisher.gsub("'","")}', '#{library}', '#{link}', '#{book.id}');
 ")
     puts ">>>>>>>> Dli #{book.id} <<<<<<<<<<<<<<<<<<<<"
   end

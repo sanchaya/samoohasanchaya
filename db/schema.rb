@@ -207,14 +207,15 @@ ActiveRecord::Schema.define(version: 20160605181247) do
   add_index "fuel_words", ["name"], name: "index_fuel_words_on_name", using: :btree
 
   create_table "kannada_books", force: true do |t|
-    t.string "name"
-    t.string "author"
-    t.string "publisher"
-    t.string "library"
-    t.string "book_link"
+    t.string   "name"
+    t.string   "author"
+    t.string   "publisher"
+    t.string   "library"
+    t.string   "book_link"
+    t.integer  "book_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
-
-  add_index "kannada_books", ["id"], name: "id_UNIQUE", unique: true, using: :btree
 
   create_table "languages", force: true do |t|
     t.string   "name"

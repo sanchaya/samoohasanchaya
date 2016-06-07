@@ -6,6 +6,7 @@ class CreateKannadaBooks < ActiveRecord::Migration
       t.string :publisher
       t.string :library
       t.string :book_link
+      t.integer :book_id
 
       t.timestamps
     end
