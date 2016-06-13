@@ -22,12 +22,17 @@
 //= require jquery.ime.inputmethods
 //= require twitter/typeahead
 //= require twitter/typeahead.min
+//= require jquery.purr
+//= require best_in_place
 //= require_tree .
 
 
 $( document ).ready( function () {
 	// Kannada ime enabled for form 
 	$( '.kan-ime' ).ime();
+
+	/* Activating Best In Place */
+	jQuery(".best_in_place").best_in_place();
 
 	// // validatin added for book info form
 	// $(".book-info-form").validate({

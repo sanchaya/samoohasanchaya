@@ -3,7 +3,7 @@ class KannadaBooksController < ApplicationController
    before_action :authenticate_user!
 
 
-  respond_to :html
+  respond_to :html, :json
 
   def index
     @kannada_books = KannadaBook.where(library: 'Dli').paginate(:page => params[:page])

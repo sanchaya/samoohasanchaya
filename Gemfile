@@ -48,3 +48,4 @@ gem 'newrelic_rpm'
 gem "font-awesome-rails"
 gem 'httparty'
 gem 'twitter-typeahead-rails'
+gem 'best_in_place', '~> 3.0.1'
