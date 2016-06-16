@@ -1,6 +1,6 @@
 class KannadaBooksController < ApplicationController
   before_action :set_kannada_book, only: [:show, :edit, :update, :destroy]
-   before_action :authenticate_user!
+  before_action :authenticate_user!
 
 
   respond_to :html, :json
@@ -38,12 +38,22 @@ class KannadaBooksController < ApplicationController
     respond_with(@kannada_book)
   end
 
-  private
-    def set_kannada_book
-      @kannada_book = KannadaBook.find(params[:id])
-    end
+  def download_all
+    require 'csv'
+    send_data(
+      KannadaBook.to_csv,
+      :type => 'text/csv',
+      :filename => 'allbooks.csv',
+      :disposition => 'attachment'
+      )
+  end
 
-    def kannada_book_params
-      params.require(:kannada_book).permit(:name, :author, :publisher)
-    end
+  private
+  def set_kannada_book
+    @kannada_book = KannadaBook.find(params[:id])
+  end
+
+  def kannada_book_params
+    params.require(:kannada_book).permit(:name, :author, :publisher, :reviewed)
+  end
 end

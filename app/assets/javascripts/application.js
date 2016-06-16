@@ -24,6 +24,8 @@
 //= require twitter/typeahead.min
 //= require jquery.purr
 //= require best_in_place
+//= require jquery-ui
+//= require best_in_place.jquery-ui
 //= require_tree .
 
 
@@ -33,7 +35,8 @@ $( document ).ready( function () {
 
 	/* Activating Best In Place */
 	jQuery(".best_in_place").best_in_place();
-
+	$('.best_in_place').bind("ajax:success", function () {$(this).closest('tr').effect('highlight'); });
+	// $('.best_in_place').bind("ajax:success", function(){ alert("Updated successfully"); });
 	// // validatin added for book info form
 	// $(".book-info-form").validate({
 	// 	rules:{

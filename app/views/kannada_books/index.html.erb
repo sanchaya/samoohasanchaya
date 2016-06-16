@@ -11,20 +11,21 @@
       <th><%= model_class.human_attribute_name(:publisher) %></th>
       <th><%= model_class.human_attribute_name(:library) %></th>
       <th><%= model_class.human_attribute_name(:barcode) %></th>
+      <th>Reviewed?</th>
     </tr>
   </thead>
   <tbody>
     <% @kannada_books.each do |kannada_book| %>
-      <tr>
-        <td><%= link_to kannada_book.id, kannada_book %></td>
-        <td><%= best_in_place kannada_book, :name %></td>
-        <td><%= best_in_place kannada_book, :author %></td>
-        <td><%= best_in_place kannada_book, :publisher %></td>
-        <td><%= kannada_book.library %></td>
-         <td><%= kannada_book.barcode %></td>
-      </tr>
+    <tr>
+      <td><%= link_to kannada_book.id, kannada_book %></td>
+      <td><%= best_in_place kannada_book, :name %></td>
+      <td><%= best_in_place kannada_book, :author %></td>
+      <td><%= best_in_place kannada_book, :publisher %></td>
+      <td><%= kannada_book.library %></td>
+      <td><%= kannada_book.barcode %></td>
+      <td><%= best_in_place kannada_book, :reviewed, as: :checkbox, collection: {false: "No", true: "Yes"} %></td>
+    </tr>
     <% end %>
   </tbody>
 </table>
 <%= will_paginate @kannada_books %>
-
