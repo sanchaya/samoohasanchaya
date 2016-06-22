@@ -30,7 +30,7 @@ class KannadaBooksController < ApplicationController
 
   def update
     @kannada_book.update(kannada_book_params)
-    respond_with(@kannada_book)
+    respond_with_bip(@kannada_book)
   end
 
   def destroy

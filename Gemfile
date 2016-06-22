@@ -43,10 +43,10 @@ gem 'devise'
 gem "therubyracer"
 gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
 gem "twitter-bootstrap-rails"
-gem 'will_paginate', '~> 3.0.6'  
+gem 'will_paginate', '~> 3.0.6'
 gem 'google-analytics-rails'
 gem 'newrelic_rpm'
 gem "font-awesome-rails"
 gem 'httparty'
 gem 'twitter-typeahead-rails'
-gem 'best_in_place', '~> 3.0.1'
+gem 'best_in_place', github: 'bernat/best_in_place'
