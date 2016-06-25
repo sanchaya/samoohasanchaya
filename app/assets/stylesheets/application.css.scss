@@ -12,6 +12,7 @@
  *
  *= require_tree .
  *= require_self
+ *= require dataTables/jquery.dataTables
  *= require font-awesome
  */
 
@@ -51,9 +52,9 @@
  	width: 100%;
  	height:0;
  	padding-bottom: 100%;
- 	background: #4679BD; 
- 	-moz-border-radius: 50%; 
- 	-webkit-border-radius: 50%; 
+ 	background: #4679BD;
+ 	-moz-border-radius: 50%;
+ 	-webkit-border-radius: 50%;
  	border-radius: 50%;
  	-webkit-box-shadow: 7px 7px 5px 0px rgba(50, 50, 50, 0.75);
  	-moz-box-shadow:    7px 7px 5px 0px rgba(50, 50, 50, 0.75);
@@ -147,7 +148,7 @@ We need to fix this later and remove below css
   cursor: pointer;
   background: url('http://i.stack.imgur.com/iqN2k.png');
   background-position: 0 -25px;
-} 
+}
 
 
 .vote.on {

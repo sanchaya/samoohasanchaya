@@ -50,3 +50,4 @@ gem "font-awesome-rails"
 gem 'httparty'
 gem 'twitter-typeahead-rails'
 gem 'best_in_place', github: 'bernat/best_in_place'
+gem 'jquery-datatables-rails', '~> 3.3.0'

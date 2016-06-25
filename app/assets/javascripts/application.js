@@ -12,6 +12,8 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require dataTables/jquery.dataTables
+//= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
 //= require twitter/bootstrap
 // require turbolinks
 //= require jquery.validate
@@ -30,12 +32,25 @@
 
 
 $( document ).ready( function () {
-	// Kannada ime enabled for form 
+	// Kannada ime enabled for form
 	$( '.kan-ime' ).ime();
 
 	/* Activating Best In Place */
 	jQuery(".best_in_place").best_in_place();
 	$('.best_in_place').bind("ajax:success", function () {$(this).closest('tr').effect('highlight'); });
+
+	$('#kannada-book').DataTable({
+  // ajax: ...,
+  // autoWidth: false,
+  // pagingType: 'full_numbers',
+  // processing: true,
+  // serverSide: true,
+
+  // Optional, if you want full pagination controls.
+  // Check dataTables documentation to learn more about available options.
+  // http://datatables.net/reference/option/pagingType
+});
+
 	// $('.best_in_place').bind("ajax:success", function(){ alert("Updated successfully"); });
 	// // validatin added for book info form
 	// $(".book-info-form").validate({

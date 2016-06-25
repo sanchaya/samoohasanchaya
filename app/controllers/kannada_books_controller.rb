@@ -6,7 +6,7 @@ class KannadaBooksController < ApplicationController
   respond_to :html, :json
 
   def index
-    @kannada_books = KannadaBook.where(library: 'Dli').paginate(:page => params[:page])
+    @kannada_books = KannadaBook.where(library: 'Dli')
     respond_with(@kannada_books)
   end
 
