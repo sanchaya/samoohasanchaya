@@ -161,7 +161,7 @@ task :merge_all_books => :environment do
 
 desc "Update rights to table kannada_books from DLI and Osmania"
 task :update_rights_to_kannada_books => :environment do
-  KannadaBook.each do |kb|
+  KannadaBook.all.each do |kb|
     klass = MergeKannadaBook.get_book_class_name(kb.library)
     rights = klass.find(kb.book_id).book_description.rights
     kb.update_attribute('rights', rights)
