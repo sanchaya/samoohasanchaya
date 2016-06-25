@@ -10,7 +10,7 @@ task :import_books_from_csv => :environment do
     publisher = Publisher.create(name: row[5], language_id: language_id) unless publisher = Publisher.find_by(name: row[5])
     book = Book.create(author_id: author.id, publisher_id: publisher.id, book_title: row[8], language_id: language_id)
     BookDescription.create(
-      :date_accessioned => row[1], 
+      :date_accessioned => row[1],
       :date_available => row[2],
       :date_issued => row[3],
       :link => row[4],
@@ -37,7 +37,7 @@ task :import_dli_books_from_csv => :environment do
     publisher = DliPublisher.create(name: row['DigitalPublisher'], language_id: language_id) unless publisher = DliPublisher.find_by(name: row['DigitalPublisher'])
     book = DliBook.create(author_id: author.id, publisher_id: publisher.id, book_title: row['Title'], language_id: language_id)
     DliBookDescription.create(
-      :book_id => book.id, 
+      :book_id => book.id,
       :contributor => row['Contributor'],
       :scanning_center => row['ScanningCenter'],
       :barcode => row['Barcode'],
@@ -74,7 +74,7 @@ task :import_category1 => :environment do
   puts "started"
   CSV.foreach(file_name, :col_sep => "\t", :headers=> true) do |row|
     p "#{row[0]} == #{row[2]}"
-    Category.create(name: row[0], kn: row[2])  unless Category.find_by(name: row[0]) 
+    Category.create(name: row[0], kn: row[2])  unless Category.find_by(name: row[0])
   end
 end
 
@@ -84,7 +84,7 @@ task :import_category2 => :environment do
   puts "started"
   CSV.foreach(file_name, :col_sep => "\t", :headers=> true) do |row|
     p "#{row[0]} == #{row[1]}"
-    Category.create(name: row[0], kn: row[1])  unless Category.find_by(name: row[0]) 
+    Category.create(name: row[0], kn: row[1])  unless Category.find_by(name: row[0])
   end
 end
 
@@ -96,7 +96,7 @@ task :assign_association1 => :environment do
     p book
     book.subjects.split(';').each do |sub|
       cat = Category.find_or_create_by(name: sub)
-      BookCategory.create(book_id: book.book_id, category_id: cat.id)  
+      BookCategory.create(book_id: book.book_id, category_id: cat.id)
     end
   end
 end
@@ -107,12 +107,12 @@ task :assign_association2 => :environment do
     p ">>>>>>>>>>>>>>>>>>>>>>>>>>"
     p book
     subject = book.subject
-    cat = if subject 
+    cat = if subject
       Category.find_or_create_by(name: subject)
     else
       Category.find_by(name: 'NULL')
     end
-    DliBookCategory.create(dli_book_id: book.book_id, category_id: cat.id)  
+    DliBookCategory.create(dli_book_id: book.book_id, category_id: cat.id)
   end
 end
 
@@ -159,3 +159,22 @@ task :merge_all_books => :environment do
   end
  end
 
+desc "Update rights to table kannada_books from DLI and Osmania"
+task :update_rights_to_kannada_books => :environment do
+  KannadaBook.first(10).each do |kb|
+    klass = MergeKannadaBook.get_book_class_name(kb.library)
+    rights = klass.find(kb.book_id).book_description.rights
+    kb.update_attribute('rights', rights)
+  end
+end
+
+class MergeKannadaBook
+  def self.rights(kannada_book)
+    get_class(kannada_book.library)
+  end
+
+  def self.get_book_class_name(library)
+    library == "Dli" ? DliBook : Book
+  end
+
+end

@@ -9,5 +9,5 @@ class KannadaBook < ActiveRecord::Base
         csv <<  column_names.map{|column| book.send(column) }
       end
     end
-  end 
+  end
 end
