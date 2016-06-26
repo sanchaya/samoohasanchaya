@@ -1,9 +1,21 @@
 Samooha Sanchaya:
+Tool which helps users to translate from English to Kannada(can use it for any languages).
+
+Upload non-translated data, use this tool to translate from normal users. Once translated can be voted again from users so high voted gets saved as translated text for respective word.
+
+Samooha for pustaka:
+
+Samooha exposes an API's, which gives list of free available books online, categories, search books etc.
+(These are metadata which were translated earlier from users)
+
+Samooha for Wiki:
+
+Samooha has exposed on more API, which sends OUT_OF_COPYRIGHT books metadata, which is helping users to create/update article on Wiki.
 
 You should have received a copy of the GNU General Public License along with this program. If not, see <www.gnu.org/licenses/>.
 
 Technologies Used
 
-Ruby 2.1.5 
-Rails 4.1.6
+Ruby 2.1.5 ,
+Rails 4.1.6,
 Mysql
