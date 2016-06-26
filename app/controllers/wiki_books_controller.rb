@@ -1,12 +1,12 @@
 class WikiBooksController < ApplicationController
 
+# Must create Different API call
   def index
     @books = WikiBook.book_full_info
     respond_to do |format|
       format.json { render json: @books }
     end
   end
-
 
   def wiki_user_info
     book_name = params['book_name']

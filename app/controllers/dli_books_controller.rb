@@ -2,14 +2,6 @@ class DliBooksController < ApplicationController
   before_action :authenticate_user!, only: [:index, :edit, :update]
 
   def index
-    reviewed =  DliBookReview.pluck('dli_book_id')
-    search_ids = DliBookTranslation.where("book_title like '%#{params[:search]}%' ").pluck('book_id')
-    non_copyright_books = DliBook.non_copyright_books.pluck('id')
-    # inside bracket gives ids except non_copyright_books ie copyrighted, again search_ids takesout copyrighted, result will be only non copyright
-    search_ids = search_ids - (search_ids - non_copyright_books) #For now we need only copyrighted books later remove this and abobe lines 
-    list_books = DliBook.includes(:book_description).includes(:author).includes(:publisher).includes(:book_translations).where("id not in (?) and id in (?)",reviewed.blank? ? [0] : reviewed, search_ids)
-    @list_books = list_books.paginate(:page => params[:page])
-    render 'books/index'
   end
 
 
@@ -25,8 +17,6 @@ class DliBooksController < ApplicationController
   def update
     find_book
     @book.book_translations.first.update_attribute('book_title',params[:book])
-    # @book.author.author_translations.first.update_attribute('name',params[:author])
-    # @book.publisher.publisher_translations.first.update_attribute('name',params[:publisher])
     DliBookReview.create(dli_book_id: @book.id)
     @description.update_attributes(others: params[:others], year: params[:year], rights: params[:rights])
     redirect_to dli_book_path(@book)

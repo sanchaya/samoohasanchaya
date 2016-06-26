@@ -8,6 +8,7 @@ class HomesController < ApplicationController
     # Use DRY
     # Move logics to Model
     # Use single query to fetch untranslated
+    # Move all business logic to Model
     translated_books = BookTranslation.pluck('book_id')
     @books = Book.where("id not in (?)", translated_books.blank? ? [0] : translated_books ).order('RAND()')
     @book = @books.first

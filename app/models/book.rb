@@ -7,8 +7,6 @@ class Book < ActiveRecord::Base
   belongs_to :author
   belongs_to :publisher
   has_many :wiki_books,  foreign_key: 'book_id', class_name: 'WikiBook'
-  has_one :book_review, dependent: :destroy #Temporary till gets reviewed then we can remove this
-
 
   def get_full_info
     { book_id: self.id,
@@ -48,7 +46,7 @@ class Book < ActiveRecord::Base
     end
 
 
-
+# Will get change once we merge all books into One main table
     def self.category_books(category)
       ActiveRecord::Base.connection.execute("
         select bt.book_title as name,at.name as author,pt.name as publisher, 'osmania' as library,bd.date_issued as year,  bd.link from book_translations bt
@@ -88,11 +86,8 @@ class Book < ActiveRecord::Base
         ")
 end
 
+# Temp view till we create Master table which contains all books in one table.
 def self.create_master 
-  ActiveRecord::Base.connection.execute("
-    drop VIEW master_books
-    ")
-   # BookTranslation.joins(:book, :book_description).select("book_translations.book_title AS book_title, books.id AS book_id, book_descriptions.link AS link").where("book_translations.book_title like ?", "%#{keyword}%")
    ActiveRecord::Base.connection.execute("
     CREATE VIEW master_books AS
     select bt.book_title as name,at.name as author,pt.name as publisher, 'osmania' as library,bd.date_issued as year,  bd.link from book_translations bt
@@ -124,11 +119,6 @@ def self.create_master
     left join dli_publisher_translations dpt
     on dpt.publisher_id = dp.id
     ")
-
-end
-
-def self.download_book_info
-
 end
 
 def self.to_csv

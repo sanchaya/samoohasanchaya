@@ -2,7 +2,6 @@ class AdminsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-
   end
 
   def download_book_info

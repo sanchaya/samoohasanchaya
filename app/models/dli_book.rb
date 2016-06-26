@@ -7,7 +7,6 @@ class DliBook < ActiveRecord::Base
   belongs_to :author, foreign_key: 'author_id', class_name: 'DliAuthor'
   belongs_to :publisher, foreign_key: 'publisher_id', class_name: 'DliPublisher'
   has_many :wiki_books,  foreign_key: 'book_id', class_name: 'WikiBook'
-  has_one :book_review, dependent: :destroy, foreign_key: 'dli_book_id', class_name: 'DliBookReview' #Temporary till gets reviewed then we can remove this
 
   def get_full_info
     { book_id: self.id,

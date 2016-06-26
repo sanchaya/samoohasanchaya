@@ -15,7 +15,6 @@
 //= require dataTables/jquery.dataTables
 //= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
 //= require twitter/bootstrap
-// require turbolinks
 //= require jquery.validate
 //= require highcharts
 //= require jquery.ime
@@ -40,33 +39,6 @@ $( document ).ready( function () {
 	$('.best_in_place').bind("ajax:success", function () {$(this).closest('tr').effect('highlight'); });
 
 	$('#kannada-book').DataTable({
-  // ajax: ...,
-  // autoWidth: false,
-  // pagingType: 'full_numbers',
-  // processing: true,
-  // serverSide: true,
-
-  // Optional, if you want full pagination controls.
-  // Check dataTables documentation to learn more about available options.
-  // http://datatables.net/reference/option/pagingType
-});
-
-	// $('.best_in_place').bind("ajax:success", function(){ alert("Updated successfully"); });
-	// // validatin added for book info form
-	// $(".book-info-form").validate({
-	// 	rules:{
-
-	// 		"others[edition]":
-	// 		{
-	// 			required: true
-	// 		}
-	// 	},
-	// 	messages:{
-	// 		"others[edition]":
-	// 		{
-	// 			required: "ದಯವಿಟ್ಟು ಪದವನ್ನು ಬೆರಳಚ್ಚು ಮಾಡಿ"
-	// 		}
-	// 	}
-	// });
+	});
 
 });
