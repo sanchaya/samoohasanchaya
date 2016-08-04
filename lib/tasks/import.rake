@@ -176,6 +176,16 @@ task :update_archive_url_for_dli => :environment do
   puts "End"
 end
 
+desc "Update Kannada Books archive Url for DLI " 
+task :update_archive_url_for_kannada_books_dli => :environment do
+  books = KannadaBook.where(:library=> "Dli")
+  books.each do |book|
+    dli = DliBook.find(book.book_id)
+    book.archive_url = dli.book_description.others['archive_url']
+    book.save
+  end
+end
+
 
 desc "Update rights to table kannada_books from DLI and Osmania"
 task :update_rights_to_kannada_books => :environment do

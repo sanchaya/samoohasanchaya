@@ -12,6 +12,7 @@
       <th><%= model_class.human_attribute_name(:library) %></th>
       <th> Rights </th>
       <th><%= model_class.human_attribute_name(:barcode) %></th>
+      <th> Archive </th>
       <th>Reviewed?</th>
     </tr>
   </thead>
@@ -25,6 +26,7 @@
       <td><%= kannada_book.library %></td>
       <td><%= kannada_book.rights %></td>
       <td><%= kannada_book.barcode %></td>
+      <td><%= kannada_book.archive_url %></td>
       <td><%= best_in_place kannada_book, :reviewed, as: :checkbox, collection: {false: "No", true: "Yes"} %></td>
     </tr>
     <% end %>
