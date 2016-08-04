@@ -142,7 +142,7 @@ task :merge_all_books => :environment do
     library = 'Osmania'
     link = book.book_description.link
     ActiveRecord::Base.connection.execute("INSERT INTO `kannada_books` (`name`, `author`, `publisher`, `library`, `book_link`, `book_id`) VALUES ('#{name.gsub("'","")}', '#{author}', '#{publisher}', '#{library}', '#{link}', '#{book.id}');
-")
+      ")
     puts ">>>>>>>> Osmania #{book.id} <<<<<<<<<<<<<<<<<<<<"
   end
 
@@ -154,10 +154,28 @@ task :merge_all_books => :environment do
     link = book.book_description.link
     barcode = book.book_description.barcode
     ActiveRecord::Base.connection.execute("INSERT INTO `kannada_books` (`name`, `author`, `publisher`, `library`, `book_link`, `book_id`, `barcode`) VALUES ('#{name.gsub("'","")}', '#{author}', '#{publisher.gsub("'","")}', '#{library}', '#{link}', '#{book.id}', '#{barcode}');
-")
+      ")
     puts ">>>>>>>> Dli #{book.id} <<<<<<<<<<<<<<<<<<<<"
   end
- end
+end
+
+desc "Update Archive Url for DLI " 
+task :update_archive_url_for_dli => :environment do
+  file_name = Rails.root.to_s + '/lib/dli_archive.csv'
+  puts "started"
+  CSV.foreach(file_name, :col_sep => ",", :headers=> true) do |row|
+    dli = DliBookDescription.where(link: row['source'].squish).first
+    if dli
+      puts row['source']
+      puts row['identifier']
+      dli.others['archive_url'] = "https://archive.org/details/" + row['identifier']
+      dli.save
+    end
+    # puts row
+  end
+  puts "End"
+end
+
 
 desc "Update rights to table kannada_books from DLI and Osmania"
 task :update_rights_to_kannada_books => :environment do
