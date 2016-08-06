@@ -6,7 +6,7 @@ class KannadaBooksController < ApplicationController
   respond_to :html, :json
 
   def index
-    @kannada_books = KannadaBook.where(library: 'Dli',reviewed: false).first(40)
+    @kannada_books = KannadaBook.where(library: 'Dli',reviewed: false)
     respond_with(@kannada_books)
   end
 
