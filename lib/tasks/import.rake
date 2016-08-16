@@ -186,6 +186,34 @@ task :update_archive_url_for_kannada_books_dli => :environment do
   end
 end
 
+desc "Update IA Url for OUDL " 
+task :update_ia_url_for_oudl => :environment do
+  file_name = Rails.root.to_s + '/lib/ia_oudl.csv'
+  puts "started"
+  CSV.foreach(file_name, :col_sep => ",", :headers=> true) do |row|
+    book_name = row['Commons_link'].split(':').last.split('.').first
+    book = BookTranslation.where(book_title: book_name).first
+    if book
+     # puts row['Commons_link']
+     # puts row['Kannada_Wikisource_link']
+      book_description = book.book.book_description
+      book_description.others['wikimedia_url'] = row['Commons_link']
+      book_description.others['wikisource_url'] = row['Kannada_Wikisource_link']
+      book_description.save
+      kannada_book = KannadaBook.find_by(book_id: book.book.id)
+      kannada_book.wikimedia_url = row['Commons_link']
+      kannada_book.wikisource_url = row['Kannada_Wikisource_link']
+      kannada_book.save
+    else
+      # puts "?????????????????????????#{row['Commons_link']}???????????????????????"
+      puts row['Commons_link']
+    end
+    # puts row
+  end
+  puts "End"
+end
+
+
 
 desc "Update rights to table kannada_books from DLI and Osmania"
 task :update_rights_to_kannada_books => :environment do
