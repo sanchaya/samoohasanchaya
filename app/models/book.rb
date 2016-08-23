@@ -40,14 +40,26 @@ class Book < ActiveRecord::Base
     end
 
     def self.search_books keyword
-      ActiveRecord::Base.connection.execute("
+      results = ActiveRecord::Base.connection.execute("
         select * from master_books
         where name like '%#{keyword}%'
         or author like '%#{keyword}%'
         ")
+      return as_json results
     end
 
-
+    def self.as_json mysql_results
+      fields = mysql_results.fields
+      array = []
+      mysql_results.each_with_index do |result|
+        hash = {}
+        result.each_with_index do |row, index|
+            hash[fields[index]] = result[index]
+        end
+        array << hash
+      end
+      array
+    end
 
     def self.category_books(category)
       ActiveRecord::Base.connection.execute("
@@ -86,12 +98,12 @@ class Book < ActiveRecord::Base
         on db.id = dbc.dli_book_id
         where dbc.category_id = #{category}
         ")
-end
+    end
 
-def self.create_master 
-  ActiveRecord::Base.connection.execute("
-    drop VIEW master_books
-    ")
+    def self.create_master 
+      ActiveRecord::Base.connection.execute("
+        drop VIEW master_books
+        ")
    # BookTranslation.joins(:book, :book_description).select("book_translations.book_title AS book_title, books.id AS book_id, book_descriptions.link AS link").where("book_translations.book_title like ?", "%#{keyword}%")
    ActiveRecord::Base.connection.execute("
     CREATE VIEW master_books AS
@@ -125,13 +137,13 @@ def self.create_master
     on dpt.publisher_id = dp.id
     ")
 
-end
+ end
 
-def self.download_book_info
+ def self.download_book_info
 
-end
+ end
 
-def self.to_csv
+ def self.to_csv
   @books = Book.includes(:book_translations).includes(:author).includes(:publisher).includes(:categories)
   @dli_books = DliBook.includes(:book_translations).includes(:author).includes(:publisher).includes(:categories)
   CSV.generate do |csv|
