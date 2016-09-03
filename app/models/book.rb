@@ -19,8 +19,13 @@ class Book < ActiveRecord::Base
       year: self.class.to_s == 'Book' ? self.book_description.date_issued : self.book_description.year ,
       url: self.book_description.link,
       categories: self.categories.pluck("kn"),
-      is_present_in_wiki: book_in_wiki?
+      is_present_in_wiki: book_in_wiki?,
+      other_metadata: books_other_metadata
       }.to_hash
+    end
+
+    def books_other_metadata
+      self.book_description.others
     end
 
     def translated_book_name
