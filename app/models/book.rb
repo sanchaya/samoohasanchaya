@@ -67,7 +67,7 @@ class Book < ActiveRecord::Base
     end
 
     def self.category_books(category)
-      ActiveRecord::Base.connection.execute("
+      results = ActiveRecord::Base.connection.execute("
         select bt.book_title as name,at.name as author,pt.name as publisher, 'osmania' as library,bd.date_issued as year,  bd.link from book_translations bt
         inner join books b
         on bt.book_id = b.id
@@ -103,6 +103,7 @@ class Book < ActiveRecord::Base
         on db.id = dbc.dli_book_id
         where dbc.category_id = #{category}
         ")
+      return as_json results
     end
 
     def self.create_master 
