@@ -141,6 +141,9 @@ class Book < ActiveRecord::Base
     on dp.id = db.publisher_id
     left join dli_publisher_translations dpt
     on dpt.publisher_id = dp.id
+
+    UNION ALL
+    select kanaja.title as name,kanaja.author as author,kanaja.publisher as publisher,'kanaja' as library,kanaja.citation_date as year, kanaja.uri as link,NULL as metadata from kanaja_books kanaja
     ")
 
  end
