@@ -196,15 +196,15 @@ task :update_ia_url_for_oudl => :environment do
     if book
      # puts row['Commons_link']
      # puts row['Kannada_Wikisource_link']
-      book_description = book.book.book_description
-      book_description.others['wikimedia_url'] = row['Commons_link']
-      book_description.others['wikisource_url'] = row['Kannada_Wikisource_link']
-      book_description.save
-      kannada_book = KannadaBook.find_by(book_id: book.book.id)
-      kannada_book.wikimedia_url = row['Commons_link']
-      kannada_book.wikisource_url = row['Kannada_Wikisource_link']
-      kannada_book.save
-    else
+     book_description = book.book.book_description
+     book_description.others['wikimedia_url'] = row['Commons_link']
+     book_description.others['wikisource_url'] = row['Kannada_Wikisource_link']
+     book_description.save
+     kannada_book = KannadaBook.find_by(book_id: book.book.id)
+     kannada_book.wikimedia_url = row['Commons_link']
+     kannada_book.wikisource_url = row['Kannada_Wikisource_link']
+     kannada_book.save
+   else
       # puts "?????????????????????????#{row['Commons_link']}???????????????????????"
       puts row['Commons_link']
     end
@@ -223,6 +223,32 @@ task :update_rights_to_kannada_books => :environment do
     kb.update_attribute('rights', rights)
   end
 end
+
+
+desc "Upload kanaja"
+task :upload_kanaja_books => :environment do
+  file_name = Rails.root.to_s + '/lib/kanaja.csv'
+  puts "started"
+  KanajaBook.delete_all
+  CSV.foreach(file_name, :col_sep => ",", :headers=> true) do |row|
+    KanajaBook.new(uri: row['uri'],
+     title: row['title'],
+     author: row['author'],
+     avail_date: row['avail_date'].to_date,
+     digi_pub_date: row['digi_pub_date'].to_date,
+     citation_date: row['citation_date'].to_date,
+     description: row['description'],
+     pages: row['pages'],
+     language: row['language'],
+     publisher: row['publisher'],
+     rights: row['rights'],
+     classification: row['classification'],
+     keywords: row['keywords'],
+     en_title: row['en_title'] ).save!
+  end
+end
+
+
 
 class MergeKannadaBook
   def self.rights(kannada_book)

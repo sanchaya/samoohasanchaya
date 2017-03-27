@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160816191721) do
+ActiveRecord::Schema.define(version: 20170327175020) do
 
   create_table "author_translations", force: true do |t|
     t.integer  "user_id"
@@ -206,6 +206,25 @@ ActiveRecord::Schema.define(version: 20160816191721) do
 
   add_index "fuel_words", ["name"], name: "index_fuel_words_on_name", using: :btree
 
+  create_table "kanaja_books", force: true do |t|
+    t.string   "uri"
+    t.string   "title"
+    t.string   "author"
+    t.date     "avail_date"
+    t.date     "digi_pub_date"
+    t.date     "citation_date"
+    t.text     "description"
+    t.integer  "pages"
+    t.string   "language"
+    t.string   "publisher"
+    t.string   "rights"
+    t.string   "classification"
+    t.string   "keywords"
+    t.string   "en_title"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "kannada_books", force: true do |t|
     t.string   "name"
     t.string   "author"
@@ -234,9 +253,10 @@ ActiveRecord::Schema.define(version: 20160816191721) do
     t.string "name"
     t.string "author"
     t.string "publisher"
-    t.string "library",   limit: 7, default: "", null: false
+    t.string "library",   limit: 7,          default: "", null: false
     t.string "year"
     t.string "link"
+    t.text   "metadata",  limit: 2147483647
   end
 
   create_table "publisher_translations", force: true do |t|
@@ -310,5 +330,28 @@ ActiveRecord::Schema.define(version: 20160816191721) do
   end
 
   add_index "wiki_users", ["book_id"], name: "index_wiki_users_on_book_id", using: :btree
+
+  create_table "world_heritage_site_translations", force: true do |t|
+    t.integer  "world_heritage_sites_id"
+    t.text     "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "world_heritage_sites", force: true do |t|
+    t.integer  "unique_number"
+    t.integer  "id_no"
+    t.text     "name"
+    t.text     "short_description_en", limit: 2147483647
+    t.text     "justification_en",     limit: 2147483647
+    t.decimal  "longitude",                               precision: 10, scale: 0
+    t.decimal  "latitude",                                precision: 10, scale: 0
+    t.string   "category"
+    t.string   "states_name_en"
+    t.text     "name_en"
+    t.string   "iso_code"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end
