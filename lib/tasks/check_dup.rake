@@ -66,6 +66,21 @@ task :update_dli_link_from_csv => :environment do
   end
 end
 
+desc "Update DLI updated archive url based on BarCode"
+task :update_dli_archive_link_from_csv => :environment do
+  puts 'started'
+  file_name = Rails.root.to_s + '/lib/new-dli-mirror.csv' 
+  CSV.foreach(file_name, :col_sep => ',', :headers => true) do |row|
+    puts ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
+    dli = DliBookDescription.find_by_barcode(row['barcode'])
+    if dli && row['new_mirror_urls'] && !row['new_mirror_urls'].blank?
+      dli.others['old_archive_url'] = dli.others['archive_url'] 
+      dli.others['archive_url'] = row['new_mirror_urls']
+      dli.save
+    end
+  end
+end
+
 
 
 class CreateDli
