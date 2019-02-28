@@ -28,6 +28,8 @@ kn:
   author: 'ಲೇಖಕ/ಕಿ'
   authors: 'ಲೇಖಕ/ಕಿಯರು'
   word: 'ಪದ'
+  # Kannada books
+  title: 'ಕನ್ನಡ ಪುಸ್ತಕಗಳು'
   # Books
   book: 'ಪುಸ್ತಕ'
   author: 'ಲೇಖಕ/ಕಿ'
