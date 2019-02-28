@@ -67,8 +67,8 @@ class Book < ActiveRecord::Base
     end
 
     def self.category_books(category)
-      results = ActiveRecord::Base.connection.execute("
-        select bt.book_title as name,at.name as author,pt.name as publisher, 'osmania' as library,bd.date_issued as year,  bd.link from book_translations bt
+       results = ActiveRecord::Base.connection.execute("
+        select bt.book_title as name,at.name as author,pt.name as publisher, 'osmania' as library,bd.date_issued as year,  bd.link, al.archive_url  from book_translations bt
         inner join books b
         on bt.book_id = b.id
         inner join authors a
@@ -83,10 +83,12 @@ class Book < ActiveRecord::Base
         on pt.publisher_id = p.id
         left join book_categories bc
         on b.id = bc.book_id 
+        left join kannada_books al
+        on b.id = al.book_id
         where bc.category_id = #{category}
 
         UNION ALL
-        select dbt.book_title as name,dat.name as author,dpt.name as publisher,'dli' as library,dbd.year as year, dbd.link from dli_book_translations dbt
+        select dbt.book_title as name,dat.name as author,dpt.name as publisher,'dli' as library,dbd.year as year, dbd.link, ald.archive_url from dli_book_translations dbt
         inner join dli_books db
         on dbt.book_id = db.id
         inner join dli_authors da
@@ -101,6 +103,8 @@ class Book < ActiveRecord::Base
         on dpt.publisher_id = dp.id
         left join dli_book_categories dbc
         on db.id = dbc.dli_book_id
+        left join kannada_books ald
+        on dbt.book_id = ald.book_id
         where dbc.category_id = #{category}
         ")
       return as_json results
