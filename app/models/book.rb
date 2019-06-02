@@ -46,7 +46,7 @@ class Book < ActiveRecord::Base
 
     def self.search_books keyword
       results = ActiveRecord::Base.connection.execute("
-        select * from master_books
+        select * from kannada_books
         where name like '%#{keyword}%'
         or author like '%#{keyword}%'
         ")
