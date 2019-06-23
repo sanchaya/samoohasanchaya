@@ -8,7 +8,7 @@ class CategoriesController < ApplicationController
 
   def show
     @category = Category.find(params[:id])
-    @category_books = Book.category_books(params[:id])#includes(:book_translations)
+    @category_books = KannadaBook.category_books(params[:id])
      respond_to do |format|
       format.json { render json: @category_books }
     end

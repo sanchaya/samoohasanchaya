@@ -11,345 +11,353 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170327175020) do
+ActiveRecord::Schema.define(version: 20190604191618) do
 
-  create_table "author_translations", force: true do |t|
-    t.integer  "user_id"
-    t.integer  "language_id"
-    t.integer  "author_id"
-    t.string   "name"
+  create_table "author_translations", force: :cascade do |t|
+    t.integer  "user_id",     limit: 4
+    t.integer  "language_id", limit: 4
+    t.integer  "author_id",   limit: 4
+    t.string   "name",        limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "authors", force: true do |t|
-    t.string   "name"
-    t.integer  "language_id"
+  create_table "authors", force: :cascade do |t|
+    t.string   "name",        limit: 255
+    t.integer  "language_id", limit: 4
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "book_categories", force: true do |t|
-    t.integer  "book_id"
-    t.integer  "category_id"
+  create_table "book_categories", force: :cascade do |t|
+    t.integer  "book_id",     limit: 4
+    t.integer  "category_id", limit: 4
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "book_descriptions", force: true do |t|
-    t.string   "date_accessioned"
-    t.string   "date_available"
-    t.string   "date_issued"
-    t.string   "link"
-    t.string   "rights"
-    t.string   "subjects"
-    t.string   "file_name"
-    t.string   "file_size"
-    t.string   "category"
-    t.integer  "book_id"
+  create_table "book_descriptions", force: :cascade do |t|
+    t.string   "date_accessioned", limit: 255
+    t.string   "date_available",   limit: 255
+    t.string   "date_issued",      limit: 255
+    t.string   "link",             limit: 255
+    t.string   "rights",           limit: 255
+    t.string   "subjects",         limit: 255
+    t.string   "file_name",        limit: 255
+    t.string   "file_size",        limit: 255
+    t.string   "category",         limit: 255
+    t.integer  "book_id",          limit: 4
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.text     "others",           limit: 2147483647
+    t.text     "others",           limit: 4294967295
   end
 
-  create_table "book_reviews", force: true do |t|
-    t.integer  "book_id"
+  create_table "book_reviews", force: :cascade do |t|
+    t.integer  "book_id",    limit: 4
     t.boolean  "reviewed"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "book_translations", force: true do |t|
-    t.integer  "language_id"
-    t.integer  "book_id"
-    t.string   "book_title"
-    t.integer  "user_id"
+  create_table "book_translations", force: :cascade do |t|
+    t.integer  "language_id", limit: 4
+    t.integer  "book_id",     limit: 4
+    t.string   "book_title",  limit: 255
+    t.integer  "user_id",     limit: 4
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "reviewed"
   end
 
-  create_table "books", force: true do |t|
-    t.integer  "author_id"
-    t.string   "book_title"
-    t.integer  "publisher_id"
-    t.integer  "language_id"
+  create_table "books", force: :cascade do |t|
+    t.integer  "author_id",    limit: 4
+    t.string   "book_title",   limit: 255
+    t.integer  "publisher_id", limit: 4
+    t.integer  "language_id",  limit: 4
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "categories", force: true do |t|
-    t.text     "name"
-    t.text     "kn"
+  create_table "categories", force: :cascade do |t|
+    t.text     "name",       limit: 65535
+    t.text     "kn",         limit: 65535
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "dli_author_translations", force: true do |t|
-    t.integer  "user_id"
-    t.integer  "language_id"
-    t.integer  "author_id"
-    t.string   "name"
+  create_table "dli_author_translations", force: :cascade do |t|
+    t.integer  "user_id",     limit: 4
+    t.integer  "language_id", limit: 4
+    t.integer  "author_id",   limit: 4
+    t.string   "name",        limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "dli_authors", force: true do |t|
-    t.string   "name"
-    t.integer  "language_id"
+  create_table "dli_authors", force: :cascade do |t|
+    t.string   "name",        limit: 255
+    t.integer  "language_id", limit: 4
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "dli_book_categories", force: true do |t|
-    t.integer  "dli_book_id"
-    t.integer  "category_id"
+  create_table "dli_book_categories", force: :cascade do |t|
+    t.integer  "dli_book_id", limit: 4
+    t.integer  "category_id", limit: 4
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "dli_book_descriptions", force: true do |t|
-    t.integer  "book_id"
-    t.string   "contributor"
-    t.string   "scanning_center"
-    t.string   "barcode"
-    t.string   "copyright"
-    t.string   "rights"
-    t.integer  "year"
-    t.integer  "pages"
-    t.string   "url"
-    t.integer  "no_of_pages"
-    t.string   "vendor"
-    t.string   "subject"
+  create_table "dli_book_descriptions", force: :cascade do |t|
+    t.integer  "book_id",          limit: 4
+    t.string   "contributor",      limit: 255
+    t.string   "scanning_center",  limit: 255
+    t.string   "barcode",          limit: 255
+    t.string   "copyright",        limit: 255
+    t.string   "rights",           limit: 255
+    t.integer  "year",             limit: 4
+    t.integer  "pages",            limit: 4
+    t.string   "url",              limit: 255
+    t.integer  "no_of_pages",      limit: 4
+    t.string   "vendor",           limit: 255
+    t.string   "subject",          limit: 255
     t.date     "digital_pub_date"
-    t.string   "link"
-    t.integer  "unnumber_pages"
-    t.string   "identifier"
+    t.string   "link",             limit: 255
+    t.integer  "unnumber_pages",   limit: 4
+    t.string   "identifier",       limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.text     "others",           limit: 2147483647
+    t.text     "others",           limit: 4294967295
   end
 
   add_index "dli_book_descriptions", ["book_id"], name: "index_dli_book_descriptions_on_book_id", using: :btree
 
-  create_table "dli_book_reviews", force: true do |t|
-    t.integer  "dli_book_id"
+  create_table "dli_book_reviews", force: :cascade do |t|
+    t.integer  "dli_book_id", limit: 4
     t.boolean  "reviewed"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "dli_book_translations", force: true do |t|
-    t.integer  "language_id"
-    t.integer  "book_id"
-    t.string   "book_title"
-    t.integer  "user_id"
-    t.boolean  "reviewed",    default: false
+  create_table "dli_book_translations", force: :cascade do |t|
+    t.integer  "language_id", limit: 4
+    t.integer  "book_id",     limit: 4
+    t.string   "book_title",  limit: 255
+    t.integer  "user_id",     limit: 4
+    t.boolean  "reviewed",                default: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "dli_books", force: true do |t|
-    t.integer  "author_id"
-    t.string   "book_title"
-    t.integer  "publisher_id"
-    t.integer  "language_id"
+  create_table "dli_books", force: :cascade do |t|
+    t.integer  "author_id",    limit: 4
+    t.string   "book_title",   limit: 255
+    t.integer  "publisher_id", limit: 4
+    t.integer  "language_id",  limit: 4
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "dli_publisher_translations", force: true do |t|
-    t.integer  "user_id"
-    t.integer  "language_id"
-    t.integer  "publisher_id"
-    t.string   "name"
+  create_table "dli_publisher_translations", force: :cascade do |t|
+    t.integer  "user_id",      limit: 4
+    t.integer  "language_id",  limit: 4
+    t.integer  "publisher_id", limit: 4
+    t.string   "name",         limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "dli_publishers", force: true do |t|
-    t.string   "name"
-    t.integer  "language_id"
+  create_table "dli_publishers", force: :cascade do |t|
+    t.string   "name",        limit: 255
+    t.integer  "language_id", limit: 4
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "fuel_modules", force: true do |t|
-    t.string   "name"
+  create_table "fuel_modules", force: :cascade do |t|
+    t.string   "name",       limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "fuel_modules", ["name"], name: "index_fuel_modules_on_name", using: :btree
 
-  create_table "fuel_translations", force: true do |t|
-    t.integer  "language_id"
-    t.integer  "user_id"
-    t.integer  "fuel_word_id"
-    t.string   "name"
-    t.text     "context"
-    t.integer  "vote"
+  create_table "fuel_translations", force: :cascade do |t|
+    t.integer  "language_id",  limit: 4
+    t.integer  "user_id",      limit: 4
+    t.integer  "fuel_word_id", limit: 4
+    t.string   "name",         limit: 255
+    t.text     "context",      limit: 65535
+    t.integer  "vote",         limit: 4
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "fuel_translations", ["name"], name: "index_fuel_translations_on_name", using: :btree
 
-  create_table "fuel_words", force: true do |t|
-    t.integer  "language_id"
-    t.integer  "fuel_module_id"
-    t.string   "name"
-    t.text     "context"
+  create_table "fuel_words", force: :cascade do |t|
+    t.integer  "language_id",    limit: 4
+    t.integer  "fuel_module_id", limit: 4
+    t.string   "name",           limit: 255
+    t.text     "context",        limit: 65535
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "fuel_words", ["name"], name: "index_fuel_words_on_name", using: :btree
 
-  create_table "kanaja_books", force: true do |t|
-    t.string   "uri"
-    t.string   "title"
-    t.string   "author"
+  create_table "kanaja_books", force: :cascade do |t|
+    t.string   "uri",            limit: 255
+    t.string   "title",          limit: 255
+    t.string   "author",         limit: 255
     t.date     "avail_date"
     t.date     "digi_pub_date"
     t.date     "citation_date"
-    t.text     "description"
-    t.integer  "pages"
-    t.string   "language"
-    t.string   "publisher"
-    t.string   "rights"
-    t.string   "classification"
-    t.string   "keywords"
-    t.string   "en_title"
+    t.text     "description",    limit: 65535
+    t.integer  "pages",          limit: 4
+    t.string   "language",       limit: 255
+    t.string   "publisher",      limit: 255
+    t.string   "rights",         limit: 255
+    t.string   "classification", limit: 255
+    t.string   "keywords",       limit: 255
+    t.string   "en_title",       limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "kannada_books", force: true do |t|
-    t.string   "name"
-    t.string   "author"
-    t.string   "publisher"
-    t.string   "library"
-    t.string   "book_link"
-    t.integer  "book_id"
-    t.string   "barcode"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.boolean  "reviewed",       default: false
-    t.text     "rights"
-    t.text     "archive_url"
-    t.text     "wikimedia_url"
-    t.text     "wikisource_url"
+  create_table "kannada_book_categories", force: :cascade do |t|
+    t.integer  "kannada_book_id", limit: 4
+    t.integer  "category_id",     limit: 4
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
   end
 
-  create_table "languages", force: true do |t|
-    t.string   "name"
-    t.string   "language_code"
+  create_table "kannada_books", force: :cascade do |t|
+    t.string   "name",           limit: 255
+    t.string   "author",         limit: 255
+    t.string   "publisher",      limit: 255
+    t.string   "library",        limit: 255
+    t.string   "book_link",      limit: 255
+    t.integer  "book_id",        limit: 4
+    t.string   "barcode",        limit: 255
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "reviewed",                     default: false
+    t.text     "rights",         limit: 65535
+    t.text     "archive_url",    limit: 65535
+    t.text     "wikimedia_url",  limit: 65535
+    t.text     "wikisource_url", limit: 65535
+    t.string   "year",           limit: 255
+  end
+
+  create_table "languages", force: :cascade do |t|
+    t.string   "name",          limit: 255
+    t.string   "language_code", limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "master_books", id: false, force: true do |t|
-    t.string "name"
-    t.string "author"
-    t.string "publisher"
+  create_table "master_books", id: false, force: :cascade do |t|
+    t.string "name",      limit: 255
+    t.string "author",    limit: 255
+    t.string "publisher", limit: 255
     t.string "library",   limit: 7,          default: "", null: false
-    t.string "year"
-    t.string "link"
-    t.text   "metadata",  limit: 2147483647
+    t.string "year",      limit: 255
+    t.string "link",      limit: 255
+    t.text   "metadata",  limit: 4294967295
   end
 
-  create_table "publisher_translations", force: true do |t|
-    t.integer  "user_id"
-    t.integer  "language_id"
-    t.integer  "publisher_id"
-    t.string   "name"
+  create_table "publisher_translations", force: :cascade do |t|
+    t.integer  "user_id",      limit: 4
+    t.integer  "language_id",  limit: 4
+    t.integer  "publisher_id", limit: 4
+    t.string   "name",         limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "publishers", force: true do |t|
-    t.string   "name"
-    t.integer  "language_id"
+  create_table "publishers", force: :cascade do |t|
+    t.string   "name",        limit: 255
+    t.integer  "language_id", limit: 4
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "users", force: true do |t|
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
-    t.string   "reset_password_token"
+  create_table "users", force: :cascade do |t|
+    t.string   "email",                  limit: 255, default: "", null: false
+    t.string   "encrypted_password",     limit: 255, default: "", null: false
+    t.string   "reset_password_token",   limit: 255
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
+    t.integer  "sign_in_count",          limit: 4,   default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip"
-    t.string   "last_sign_in_ip"
-    t.string   "name"
+    t.string   "current_sign_in_ip",     limit: 255
+    t.string   "last_sign_in_ip",        limit: 255
+    t.string   "name",                   limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "confirmation_token"
+    t.string   "confirmation_token",     limit: 255
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
-    t.string   "unconfirmed_email"
+    t.string   "unconfirmed_email",      limit: 255
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
-  create_table "vote_translations", force: true do |t|
-    t.integer  "user_id"
-    t.integer  "fuel_translation_id"
-    t.integer  "fuel_word_id"
+  create_table "vote_translations", force: :cascade do |t|
+    t.integer  "user_id",             limit: 4
+    t.integer  "fuel_translation_id", limit: 4
+    t.integer  "fuel_word_id",        limit: 4
     t.boolean  "value"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "wiki_books", force: true do |t|
-    t.string   "book_name"
-    t.string   "library"
-    t.integer  "book_id"
+  create_table "wiki_books", force: :cascade do |t|
+    t.string   "book_name",    limit: 255
+    t.string   "library",      limit: 255
+    t.integer  "book_id",      limit: 4
     t.boolean  "book_present"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "wiki_users", force: true do |t|
+  create_table "wiki_users", force: :cascade do |t|
     t.boolean  "is_account"
-    t.string   "book_name"
-    t.string   "user_name"
+    t.string   "book_name",   limit: 255
+    t.string   "user_name",   limit: 255
     t.boolean  "was_present"
     t.boolean  "is_present"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "book_id"
-    t.string   "library"
+    t.integer  "book_id",     limit: 4
+    t.string   "library",     limit: 255
   end
 
   add_index "wiki_users", ["book_id"], name: "index_wiki_users_on_book_id", using: :btree
 
-  create_table "world_heritage_site_translations", force: true do |t|
-    t.integer  "world_heritage_sites_id"
-    t.text     "name"
+  create_table "world_heritage_site_translations", force: :cascade do |t|
+    t.integer  "world_heritage_sites_id", limit: 4
+    t.text     "name",                    limit: 65535
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "world_heritage_sites", force: true do |t|
-    t.integer  "unique_number"
-    t.integer  "id_no"
-    t.text     "name"
-    t.text     "short_description_en", limit: 2147483647
-    t.text     "justification_en",     limit: 2147483647
-    t.decimal  "longitude",                               precision: 10, scale: 0
-    t.decimal  "latitude",                                precision: 10, scale: 0
-    t.string   "category"
-    t.string   "states_name_en"
-    t.text     "name_en"
-    t.string   "iso_code"
+  create_table "world_heritage_sites", force: :cascade do |t|
+    t.integer  "unique_number",        limit: 4
+    t.integer  "id_no",                limit: 4
+    t.text     "name",                 limit: 65535
+    t.text     "short_description_en", limit: 4294967295
+    t.text     "justification_en",     limit: 4294967295
+    t.decimal  "longitude",                               precision: 10
+    t.decimal  "latitude",                                precision: 10
+    t.string   "category",             limit: 255
+    t.string   "states_name_en",       limit: 255
+    t.text     "name_en",              limit: 65535
+    t.string   "iso_code",             limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
